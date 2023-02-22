@@ -1,0 +1,850 @@
+openapi: 3.0.0
+info:
+  title: 'TicTacToeApi'
+  description: 'This is the OpenAPi config for the TicTacToe Game!'
+  version: 0.0.0
+servers:
+  - url: /
+    description: ''
+paths:
+  /api/authentication_token:
+    post:
+      operationId: postCredentialsItem
+      tags:
+        - Token
+      responses:
+        '200':
+          description: Get JWT token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+      summary: Get JWT token to login, refresh_token to refresh expired token.
+      requestBody:
+        description: Generate new JWT Token
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+        required: false
+      security: []
+    parameters: []
+  /api/games:
+    get:
+      operationId: api_games_get_collection
+      tags:
+        - Game
+      responses:
+        '200':
+          description: Game collection
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  hydra:member:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Game.jsonld-game.read'
+                  hydra:totalItems:
+                    type: integer
+                    minimum: 0
+                  hydra:view:
+                    type: object
+                    properties:
+                      '@id':
+                        type: string
+                        format: iri-reference
+                      '@type':
+                        type: string
+                      hydra:first:
+                        type: string
+                        format: iri-reference
+                      hydra:last:
+                        type: string
+                        format: iri-reference
+                      hydra:previous:
+                        type: string
+                        format: iri-reference
+                      hydra:next:
+                        type: string
+                        format: iri-reference
+                    example:
+                      '@id': string
+                      type: string
+                      hydra:first: string
+                      hydra:last: string
+                      hydra:previous: string
+                      hydra:next: string
+                  hydra:search:
+                    type: object
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                      hydra:mapping:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            '@type':
+                              type: string
+                            variable:
+                              type: string
+                            property:
+                              type: string
+                              nullable: true
+                            required:
+                              type: boolean
+                required:
+                  - hydra:member
+      summary: Retrieves the collection of Game resources.
+      description: Retrieves the collection of Game resources.
+      parameters:
+        - name: page
+          in: query
+          description: The collection page number
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: integer
+            default: 1
+          style: form
+          explode: false
+          allowReserved: false
+        - name: player1
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        - name: player1[]
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+          allowReserved: false
+        - name: player2
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        - name: player2[]
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+          allowReserved: false
+        - name: result
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        - name: result[]
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+          allowReserved: false
+        - name: open
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: boolean
+          style: form
+          explode: false
+          allowReserved: false
+        - name: open[]
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: array
+            items:
+              type: boolean
+          style: form
+          explode: true
+          allowReserved: false
+        - name: code
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        - name: code[]
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+          allowReserved: false
+        - name: order[createdAt]
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          style: form
+          explode: false
+          allowReserved: false
+        - name: order[finishedAt]
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          style: form
+          explode: false
+          allowReserved: false
+        - name: order[result]
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          style: form
+          explode: false
+          allowReserved: false
+      deprecated: false
+    post:
+      operationId: api_games_post
+      tags:
+        - Game
+      responses:
+        '201':
+          description: Game resource created
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Game.jsonld-game.read'
+          links: {}
+        '400':
+          description: Invalid input
+        '422':
+          description: Unprocessable entity
+      summary: Creates a Game resource.
+      description: Creates a Game resource.
+      parameters: []
+      requestBody:
+        description: The new Game resource
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Game.jsonld-game.create'
+        required: true
+      deprecated: false
+    parameters: []
+  /api/games/{id}:
+    get:
+      operationId: api_games_id_get
+      tags:
+        - Game
+      responses:
+        '200':
+          description: Game resource
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Game.jsonld-game.read'
+        '404':
+          description: Resource not found
+      summary: Retrieves a Game resource.
+      description: Retrieves a Game resource.
+      parameters:
+        - name: id
+          in: path
+          description: Game identifier
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    parameters: []
+  /api/token/refresh:
+    post:
+      operationId: postRefreshTokenItem
+      tags:
+        - Token
+      responses:
+        '200':
+          description: Get Refreshed JWT token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+      summary: Get new refreshed JWT token from refresh_token.
+      requestBody:
+        description: Generate refreshed JWT Token
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshToken'
+        required: false
+      security: []
+    parameters: []
+  /api/turns:
+    post:
+      operationId: api_turns_post
+      tags:
+        - Turn
+      responses:
+        '201':
+          description: Turn resource created
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Turn.jsonld-game.read'
+          links: {}
+        '400':
+          description: Invalid input
+        '422':
+          description: Unprocessable entity
+      summary: Creates a Turn resource.
+      description: Creates a Turn resource.
+      parameters: []
+      requestBody:
+        description: The new Turn resource
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Turn.jsonld-turn.create'
+        required: true
+      deprecated: false
+    parameters: []
+  /api/users:
+    get:
+      operationId: api_users_get_collection
+      tags:
+        - User
+      responses:
+        '200':
+          description: User collection
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  hydra:member:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User.jsonld-user.read'
+                  hydra:totalItems:
+                    type: integer
+                    minimum: 0
+                  hydra:view:
+                    type: object
+                    properties:
+                      '@id':
+                        type: string
+                        format: iri-reference
+                      '@type':
+                        type: string
+                      hydra:first:
+                        type: string
+                        format: iri-reference
+                      hydra:last:
+                        type: string
+                        format: iri-reference
+                      hydra:previous:
+                        type: string
+                        format: iri-reference
+                      hydra:next:
+                        type: string
+                        format: iri-reference
+                    example:
+                      '@id': string
+                      type: string
+                      hydra:first: string
+                      hydra:last: string
+                      hydra:previous: string
+                      hydra:next: string
+                  hydra:search:
+                    type: object
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                      hydra:mapping:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            '@type':
+                              type: string
+                            variable:
+                              type: string
+                            property:
+                              type: string
+                              nullable: true
+                            required:
+                              type: boolean
+                required:
+                  - hydra:member
+      summary: Retrieves the collection of User resources.
+      description: Retrieves the collection of User resources.
+      parameters:
+        - name: page
+          in: query
+          description: The collection page number
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: integer
+            default: 1
+          style: form
+          explode: false
+          allowReserved: false
+        - name: name
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+      deprecated: false
+    post:
+      operationId: api_users_post
+      tags:
+        - User
+      responses:
+        '201':
+          description: User resource created
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User.jsonld-user.read'
+          links: {}
+        '400':
+          description: Invalid input
+        '422':
+          description: Unprocessable entity
+      summary: Creates a User resource.
+      description: Creates a User resource.
+      parameters: []
+      requestBody:
+        description: The new User resource
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User.jsonld-user.create'
+        required: true
+      deprecated: false
+    parameters: []
+  /api/users/{id}:
+    get:
+      operationId: api_users_id_get
+      tags:
+        - User
+      responses:
+        '200':
+          description: User resource
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User.jsonld-user.read'
+        '404':
+          description: Resource not found
+      summary: Retrieves a User resource.
+      description: Retrieves a User resource.
+      parameters:
+        - name: id
+          in: path
+          description: User identifier
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    put:
+      operationId: api_users_id_put
+      tags:
+        - User
+      responses:
+        '200':
+          description: User resource updated
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User.jsonld-user.read'
+          links: {}
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+        '422':
+          description: Unprocessable entity
+      summary: Replaces the User resource.
+      description: Replaces the User resource.
+      parameters:
+        - name: id
+          in: path
+          description: User identifier
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      requestBody:
+        description: The updated User resource
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User.jsonld-user.update'
+        required: true
+      deprecated: false
+    parameters: []
+components:
+  schemas:
+    Game.jsonld-game.create:
+      type: object
+      description: ''
+      deprecated: false
+      required:
+        - player2
+      properties:
+        player2:
+          type: string
+          format: iri-reference
+          nullable: true
+    Game.jsonld-game.read:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        '@context':
+          readOnly: true
+          oneOf:
+            - type: string
+            - type: object
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  type: string
+                  enum:
+                    - http://www.w3.org/ns/hydra/core#
+              required:
+                - '@vocab'
+                - hydra
+              additionalProperties: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        player1:
+          type: string
+          format: iri-reference
+          nullable: true
+        player2:
+          type: string
+          format: iri-reference
+          nullable: true
+        result:
+          default: Unfinished
+          example: Unfinished
+          type: string
+          enum:
+            - Unfinished
+            - Player 1
+            - Player 2
+            - Draw
+        open:
+          default: true
+          example: true
+          type: boolean
+          nullable: true
+        code:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          nullable: true
+        finishedAt:
+          type: string
+          format: date-time
+          nullable: true
+        turns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Turn.jsonld-game.read'
+        currentTurnPlayer:
+          type: string
+          format: iri-reference
+      required:
+        - player2
+    Turn.jsonld-game.read:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        '@context':
+          readOnly: true
+          oneOf:
+            - type: string
+            - type: object
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  type: string
+                  enum:
+                    - http://www.w3.org/ns/hydra/core#
+              required:
+                - '@vocab'
+                - hydra
+              additionalProperties: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        player:
+          type: string
+          format: iri-reference
+          nullable: true
+        x:
+          minimum: 0
+          maximum: 2
+          type: integer
+          nullable: true
+        'y':
+          minimum: 0
+          maximum: 2
+          type: integer
+          nullable: true
+        isPlayer1:
+          type: boolean
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          nullable: true
+        highlight:
+          type: boolean
+          nullable: true
+      required:
+        - x
+        - 'y'
+    Turn.jsonld-turn.create:
+      type: object
+      description: ''
+      deprecated: false
+      required:
+        - x
+        - 'y'
+        - game
+      properties:
+        x:
+          minimum: 0
+          maximum: 2
+          type: integer
+          nullable: true
+        'y':
+          minimum: 0
+          maximum: 2
+          type: integer
+          nullable: true
+        game:
+          type: string
+          format: iri-reference
+          nullable: true
+    User.jsonld-user.create:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        email:
+          format: email
+          externalDocs:
+            url: https://schema.org/email
+          type: string
+        plainPassword:
+          minLength: 6
+          type: string
+        name:
+          minLength: 3
+          type: string
+    User.jsonld-user.read:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        '@context':
+          readOnly: true
+          oneOf:
+            - type: string
+            - type: object
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  type: string
+                  enum:
+                    - http://www.w3.org/ns/hydra/core#
+              required:
+                - '@vocab'
+                - hydra
+              additionalProperties: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        email:
+          format: email
+          externalDocs:
+            url: https://schema.org/email
+          type: string
+        name:
+          minLength: 3
+          type: string
+    User.jsonld-user.update:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        plainPassword:
+          minLength: 6
+          type: string
+        name:
+          minLength: 3
+          type: string
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+          readOnly: true
+        refresh_token:
+          type: string
+          readOnly: true
+    Credentials:
+      type: object
+      properties:
+        email:
+          type: string
+          example: johndoe@example.com
+        password:
+          type: string
+          example: apassword
+    RefreshToken:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+  responses: {}
+  parameters: {}
+  examples: {}
+  requestBodies: {}
+  headers: {}
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - JWT: []
+tags: []

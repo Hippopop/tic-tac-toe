@@ -1,14 +1,21 @@
 name: tic_tac_toe
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=2.19.0 <3.0.0'
+  sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+
+  dio: '>=4.0.1 <5.0.0'
+  get: ^4.6.5
+  go_router: ^6.0.9
+  shared_preferences: ^2.0.17
+  openapi:
+    path: packages/game_api
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +24,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/fonts/
+    - assets/images/
+    - assets/videos/
+    - assets/audios/
+    - assets/lottie_animations/
+    - assets/rive_animations/
