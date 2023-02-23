@@ -2,42 +2,33 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:openapi/openapi.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tic_tac_toe/src/my_app.dart';
+import 'package:tic_tac_toe/src/services/data_source/request_handler.dart';
+import 'package:tic_tac_toe/src/services/route/app_route.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final api = Openapi(
-    basePathOverride: "https://tictactoe.stage.mcmhq.io",
-    interceptors: [InterceptDio()],
+  final dio = Dio(
+    BaseOptions(
+      contentType: "application/ld+json",
+    ),
   );
-  Credentials credentials = Credentials().rebuild((cred) => cred
-    ..email = "gamer15@tictactoe.dev"
-    ..password = "aaaaaa");
-  final res =
-      await api.getTokenApi().postCredentialsItem(credentials: credentials);
-  log(res.data.toString());
-
-  try {
-    api.dio.options.headers
-        .addAll({"Authorization": "Bearer ${res.data?.token}"});
-    final game = await api.getGameApi().apiGamesGetCollection();
-    log(game.data.toString());
-  } catch (error) {
-    log(error.runtimeType.toString());
-    log(error.toString());
-  }
-
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MyApp();
-  }
+  final prefs = await SharedPreferences.getInstance();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => RequestHandler(dio: dio, prefs: prefs),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RouteProvider(initialRoute: "/"),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class InterceptDio extends Interceptor {

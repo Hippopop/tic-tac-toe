@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tic_tac_toe/src/services/route/app_route.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -7,12 +9,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: context.read<RouteProvider>().router,
+      routeInformationParser: context.read<RouteProvider>().router.routeInformationParser,
     );
   }
 }
