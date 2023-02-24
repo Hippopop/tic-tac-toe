@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tic_tac_toe/src/features/auth/view/sign_in.dart';
+import 'package:tic_tac_toe/src/features/home/view/home_page.dart';
 
 class RouteProvider extends ChangeNotifier {
   RouteProvider({required this.initialRoute})
@@ -9,7 +10,11 @@ class RouteProvider extends ChangeNotifier {
           routes: [
             GoRoute(
               path: "/",
-              builder: (context, state) => const SIgnInWidget(),
+              builder: (context, state) => const SignInWidget(),
+            ),
+            GoRoute(
+              path: "/home",
+              builder: (context, state) => const HomePageWidget(),
             ),
           ],
         );
