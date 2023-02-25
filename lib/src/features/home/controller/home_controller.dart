@@ -17,7 +17,6 @@ class HomeController extends ChangeNotifier {
 
   final HomeRepository _repository;
   List<GameData> gamesList = [];
-  // UserListModel? userListModel;
 
   fetchGameList() async {
     final res = await _repository.getGameList();
@@ -32,17 +31,20 @@ class HomeController extends ChangeNotifier {
       },
     );
     if (list != null) {
-      gamesList = list.hydraMember;
+      gamesList = list.hydraMember.reversed.toList();
       final bulkUserList = [
-        ...gamesList.map((e) => e.player1 ?? "").toList(),
-        ...gamesList.map((e) => e.player2 ?? "").toList()
+        ...gamesList.map((e) => e.player1 ?? "").toSet().toList(),
+        ...gamesList.map((e) => e.player2 ?? "").toSet().toList()
       ];
       for (String element in bulkUserList.toSet().toList()) {
         if (element != "") {
-          userController.addUser(element);
+          await userController.addUser(element);
         }
       }
+      notifyListeners();
     }
-    notifyListeners();
   }
+
+  updateRequestHandler(RequestHandler newRh) =>
+      _repository.updateRequestHandler(newRh);
 }

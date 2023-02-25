@@ -12,6 +12,11 @@ class HomeRepository {
   static const gameEndpoint = "/api/games";
 
   RequestHandler requestHandler;
+  updateRequestHandler(RequestHandler newRH) {
+    requestHandler = newRH;
+  }
+
+
   Future<Either<RequestException?, GameList>> getGameList() async {
     return TaskEither.tryCatch(() async {
       final res = await requestHandler.get(

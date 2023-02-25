@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tic_tac_toe/src/features/auth/view/sign_in.dart';
+import 'package:tic_tac_toe/src/features/create/view/create_screen.dart';
 import 'package:tic_tac_toe/src/features/game/view/game_screen.dart';
 import 'package:tic_tac_toe/src/features/home/view/home_page.dart';
 import 'package:tic_tac_toe/src/services/data_source/request_handler.dart';
 
 class RouteProvider extends ChangeNotifier {
   RouteProvider({required RequestHandler requestHandler})
-      : /* _requestHandler = requestHandler, */
-        router = GoRouter(
+      : router = GoRouter(
           initialLocation: "/",
           routes: [
             GoRoute(
@@ -16,24 +16,31 @@ class RouteProvider extends ChangeNotifier {
               builder: (context, state) => const SignInWidget(),
             ),
             GoRoute(
-                path: "/home",
-                builder: (context, state) => const HomepageScreen(),
-                routes: [
-                  GoRoute(
-                    path: "game",
-                    builder: (context, state) => const GameScreen(),
-                  ),
-                ]),
+              path: "/home",
+              builder: (context, state) => const HomepageScreen(),
+            ),
+            GoRoute(
+              path: "/game/:id",
+              builder: (context, state) {
+                return GameScreen(gameId: state.params['id']!);
+              },
+            ),
+            GoRoute(
+              path: "/create",
+              builder: (context, state) {
+                return const CreateScreen();
+              },
+            ),
           ],
           redirect: (context, state) async {
             if (requestHandler.hasToken) {
-              return (state.subloc == "/") ? "/home" : state.location;
+              final bool loginPage = (state.location == "/");
+              return  loginPage? "/home" : state.location;
             } else {
               return "/";
             }
           },
         );
 
-  // RequestHandler _requestHandler;
   final GoRouter router;
 }

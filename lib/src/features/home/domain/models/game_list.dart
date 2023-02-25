@@ -1,3 +1,6 @@
+import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
+
 class GameList {
   String? context;
   String? id;
@@ -53,7 +56,7 @@ class GameList {
   }
 }
 
-class GameData {
+class GameData extends Equatable {
   String? idPath;
   String? type;
   int? id;
@@ -67,6 +70,11 @@ class GameData {
   List<Turns>? turns;
   String? currentTurnPlayer;
 
+  final _format = DateFormat("yyyy-MM-ddTHH:mm:ss+");
+
+  DateTime get createTime => _format.parse(createdAt ?? "");
+  DateTime get finishTime => _format.parse(finishedAt ?? "");
+
   String? get winnerPath {
     if (result == "Player 2") return player2;
     if (result == "Player 1") return player1;
@@ -74,7 +82,7 @@ class GameData {
   }
 
   String get player1path => winnerPath ?? player1!;
-  String get player2path => (winnerPath == player2)? player1! : player2!;
+  String get player2path => (winnerPath == player2) ? player1! : player2!;
 
   GameData(
       {this.idPath,
@@ -128,6 +136,9 @@ class GameData {
     mapData['currentTurnPlayer'] = currentTurnPlayer;
     return mapData;
   }
+
+  @override
+  List<Object?> get props => [code, idPath, id, open, turns];
 }
 
 class Turns {

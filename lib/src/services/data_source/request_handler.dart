@@ -33,20 +33,22 @@ class RequestHandler extends ChangeNotifier {
     log("#Updated: \$TOKEN => $token");
     userToken = token;
     _secureStorage.write(key: tokenKey, value: token.toJson());
+    _dio.interceptors.clear();
+    _dio.interceptors.add(InterceptDio(handleError: handleError));
     notifyListeners();
   }
 
   Future<bool> refreshToken() async {
     log("#Refreshing TOKEN");
     try {
+      _dio.interceptors.clear();
       final res = await post(
-        "/token/refresh",
+        "/api/token/refresh",
         {"refresh_token": userToken!.refreshToken},
         requireToken: false,
       );
       final AuthToken newToken = AuthToken.fromMap(res);
       updateToken(token: newToken);
-      notifyListeners();
       return !JwtDecoder.isExpired(newToken.token);
     } catch (e, s) {
       log("##ERROR## Refreshing TOKEN", stackTrace: s);
@@ -59,7 +61,8 @@ class RequestHandler extends ChangeNotifier {
 
   Future<bool> confirmSecureToken(bool tokenNeeded) async {
     bool isSuccessful = true;
-    if ((!hasToken || JwtDecoder.isExpired(userToken!.token)) && tokenNeeded) {
+    if (((!hasToken || JwtDecoder.isExpired(userToken!.token))) &&
+        tokenNeeded) {
       isSuccessful = await refreshToken();
     }
     if (tokenNeeded) {
@@ -68,6 +71,28 @@ class RequestHandler extends ChangeNotifier {
       _dio.options.headers.remove("Authorization");
     }
     return isSuccessful;
+  }
+
+  handleError(DioError err, ErrorInterceptorHandler handler) async {
+    try {
+      log("#TRYING TO RESOLVE");
+      await refreshToken();
+      final req = await _dio.request(
+        err.requestOptions.path,
+        options: Options(
+            method: err.requestOptions.method,
+            headers: err.requestOptions.headers),
+        data: err.requestOptions.data,
+        queryParameters: err.requestOptions.queryParameters,
+      );
+      handler.resolve(req);
+    } catch (e, s) {
+      log("##ERROR## Refreshing TOKEN", stackTrace: s);
+      userToken = null;
+      _secureStorage.delete(key: tokenKey);
+      notifyListeners();
+      return false;
+    }
   }
 
   Future post(
@@ -229,6 +254,19 @@ class RequestException implements Exception {
         error: error,
         stackTrace: trace,
       );
+    }
+  }
+}
+
+class InterceptDio extends Interceptor {
+  InterceptDio({required this.handleError});
+  final Function handleError;
+  @override
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
+    if (err.type == DioErrorType.response && err.response?.statusCode == 401) {
+      await handleError(err, handler);
+    } else {
+      super.onError(err, handler);
     }
   }
 }

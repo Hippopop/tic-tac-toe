@@ -14,7 +14,9 @@ class GameCardWidget extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: () {
-        context.go("game");
+        context.push(
+          "/game/${gameData.id}",
+        );
       },
       child: Container(
         clipBehavior: Clip.hardEdge,
@@ -87,13 +89,39 @@ class GameCardWidget extends StatelessWidget {
                               color: Color(0xFF717923),
                               size: 12,
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  2, 0, 0, 0),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    2, 0, 0, 0),
+                                child: Text(
+                                  context
+                                          .watch<UserController>()
+                                          .getUserByPath(gameData.winnerPath!)
+                                          ?.name ??
+                                      "",
+                                  maxLines: 1,
+                                  softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: const Color(0xFF6E6B25),
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
                               child: Text(
                                 context
                                         .watch<UserController>()
-                                        .getUserByPath(gameData.winnerPath!)
+                                        .getUserByPath(gameData.player1path)
                                         ?.name ??
                                     "",
                                 maxLines: 1,
@@ -103,50 +131,31 @@ class GameCardWidget extends StatelessWidget {
                                     .bodyText1
                                     .override(
                                       fontFamily: 'Poppins',
-                                      color: const Color(0xFF6E6B25),
                                       fontWeight: FontWeight.w500,
                                     ),
                               ),
-                            ),
-                          ],
-                        )
-                      : Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              context
-                                      .watch<UserController>()
-                                      .getUserByPath(gameData.player1path)
-                                      ?.name ??
-                                  "",
-                              maxLines: 1,
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
                             ),
                           ],
                         ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        context
-                                .watch<UserController>()
-                                .getUserByPath(gameData.player2path)
-                                ?.name ??
-                            "",
-                        maxLines: 1,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                            ),
+                      Expanded(
+                        child: Text(
+                          context
+                                  .watch<UserController>()
+                                  .getUserByPath(gameData.player2path)
+                                  ?.name ??
+                              "",
+                          maxLines: 1,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                        ),
                       ),
                     ],
                   ),
