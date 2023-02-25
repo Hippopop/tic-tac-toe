@@ -15,6 +15,7 @@ void main() async {
   final dio = Dio(
     BaseOptions(
       contentType: "application/ld+json",
+      headers: {"accept": "application/ld+json"},
     ),
   );
   const secureStorage = FlutterSecureStorage(
@@ -55,4 +56,3 @@ void main() async {
     ),
   );
 }
-

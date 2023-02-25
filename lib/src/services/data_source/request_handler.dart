@@ -27,9 +27,7 @@ class RequestHandler extends ChangeNotifier {
 
   AuthToken? userToken;
 
-  bool get hasToken {
-    return userToken != null && !JwtDecoder.isExpired(userToken!.token);
-  }
+  bool get hasToken => userToken != null;
 
   updateToken({required AuthToken token}) async {
     log("#Updated: \$TOKEN => $token");
@@ -41,15 +39,18 @@ class RequestHandler extends ChangeNotifier {
   Future<AuthToken?> refreshToken() async {
     log("#Refreshing TOKEN");
     final res = await post(
-        "/token/refresh", {"refresh_token": userToken!.refreshToken});
-    final AuthToken newToken = AuthToken.fromJson(res);
+      "/token/refresh",
+      {"refresh_token": userToken!.refreshToken},
+      requireToken: false,
+    );
+    final AuthToken newToken = AuthToken.fromMap(res);
     updateToken(token: newToken);
     notifyListeners();
     return newToken;
   }
 
   confirmSecureToken(bool tokenNeeded) async {
-    if (hasToken && JwtDecoder.isExpired(userToken!.token)) {
+    if ((!hasToken || JwtDecoder.isExpired(userToken!.token)) && tokenNeeded) {
       await refreshToken();
     }
     if (tokenNeeded) {
@@ -209,7 +210,7 @@ class RequestException implements Exception {
   }) {
     if (useLog) {
       log(
-        "method: \"$method\"\nerrorMsg: \"$msg\"\nurl: \"$url\"\ndata: ${data.toString()}\n",
+        "method: \"$method\"\nerrorMsg: \"$msg\"\nurl: \"$url\"\ndata: ${data.toString()}\n ${res?.data.toString()}",
         name: "#RequestException",
         time: DateTime.now(),
         error: error,

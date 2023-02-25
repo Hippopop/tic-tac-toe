@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
       value: AuthController(requestHandler: context.read<RequestHandler>()),
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        // routerConfig: context.read<RouteProvider>().router,
         routerDelegate: context.read<RouteProvider>().router.routerDelegate,
         routeInformationParser:
             context.read<RouteProvider>().router.routeInformationParser,
