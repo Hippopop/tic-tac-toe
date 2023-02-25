@@ -1,26 +1,26 @@
 import 'dart:developer';
 
 import 'package:fpdart/fpdart.dart';
-import 'package:tic_tac_toe/src/features/auth/domain/models/login_request_model.dart';
-import 'package:tic_tac_toe/src/features/auth/domain/models/token_model.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/user_model.dart';
 import 'package:tic_tac_toe/src/services/data_source/request_handler.dart';
 
-class AuthRepository {
-  RequestHandler requestHandler;
-  AuthRepository({required this.requestHandler});
-  static const authenticateTokenPath = "/api/authentication_token";
-  static const currentUserPath = "/api/users/me";
+import '../../../../features/home/domain/models/user_list.dart';
 
-  Future<Either<RequestException?, AuthToken>> requestLogin(
-      {required LoginRequest requestData}) async {
+class UserRepository {
+  UserRepository({
+    required this.requestHandler,
+  });
+
+  final RequestHandler requestHandler;
+  static const usersEndpoint = "/api/users";
+
+  Future<Either<RequestException?, User>> getUser(String userPath) async {
     return TaskEither.tryCatch(() async {
-      final res = await requestHandler.post(
-        authenticateTokenPath,
-        requestData.toMap(),
-        requireToken: false,
+      final res = await requestHandler.get(
+        userPath,
       );
-      return AuthToken.fromMap(res);
+      log(res.toString());
+      return User.fromMap(res);
     }, (error, stackTrace) {
       if (error is RequestException) {
         return error;
@@ -30,13 +30,18 @@ class AuthRepository {
     }).run();
   }
 
-  Future<Either<RequestException?, User>> getCurrentUser() async {
+  Future<Either<RequestException?, UserListModel>> getUserList(
+      {String? query}) async {
+    String queryName = "";
+    bool isNullOrEmpty = (query == null || query.isEmpty);
+    if (!isNullOrEmpty) queryName = "?name=$query";
+
     return TaskEither.tryCatch(() async {
       final res = await requestHandler.get(
-        currentUserPath,
+        "$usersEndpoint$queryName",
       );
       log(res.toString());
-      return User.fromMap(res);
+      return UserListModel.fromMap(res);
     }, (error, stackTrace) {
       if (error is RequestException) {
         return error;

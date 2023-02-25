@@ -2,7 +2,6 @@ import 'dart:developer' show log;
 
 import 'package:fpdart/fpdart.dart';
 import 'package:tic_tac_toe/src/features/home/domain/models/game_list.dart';
-import 'package:tic_tac_toe/src/features/home/domain/models/user_list.dart';
 import 'package:tic_tac_toe/src/services/data_source/request_handler.dart';
 
 class HomeRepository {
@@ -10,8 +9,7 @@ class HomeRepository {
     required this.requestHandler,
   });
 
-  static const gameEndpoint = "/games";
-  static const usersEndpoint = "/users";
+  static const gameEndpoint = "/api/games";
 
   RequestHandler requestHandler;
   Future<Either<RequestException?, GameList>> getGameList() async {
@@ -21,26 +19,6 @@ class HomeRepository {
       );
       log(res.toString());
       return GameList.fromMap(res);
-    }, (error, stackTrace) {
-      if (error is RequestException) {
-        return error;
-      } else {
-        log("#Unhandled Error", error: error, stackTrace: stackTrace);
-      }
-    }).run();
-  }
-
-  Future<Either<RequestException?, UserListModel>> getUserList({String? query}) async {
-    String queryData = "";
-    bool isNullOrEmpty = (query == null || query.isEmpty);
-    if(!isNullOrEmpty) queryData = "?name=$query";
-
-    return TaskEither.tryCatch(() async {
-      final res = await requestHandler.get(
-        "$usersEndpoint$queryData",
-      );
-      log(res.toString());
-      return UserListModel.fromMap(res);
     }, (error, stackTrace) {
       if (error is RequestException) {
         return error;

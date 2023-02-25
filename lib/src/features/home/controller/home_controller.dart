@@ -1,25 +1,27 @@
 import 'dart:developer';
-
 import 'package:flutter/widgets.dart';
 import 'package:tic_tac_toe/src/features/home/domain/home_repository.dart';
 import 'package:tic_tac_toe/src/features/home/domain/models/game_list.dart';
-import 'package:tic_tac_toe/src/features/home/domain/models/user_list.dart';
 import 'package:tic_tac_toe/src/services/data_source/request_handler.dart';
+import 'package:tic_tac_toe/src/services/data_source/user_provider/user_controller.dart';
 
 class HomeController extends ChangeNotifier {
-  HomeController({required RequestHandler requestHandler})
+  HomeController(
+      {required RequestHandler requestHandler, required this.userController})
       : _repository = HomeRepository(requestHandler: requestHandler) {
     log("HomeController Created!");
-    fetchGameList();
+    if (gamesList.isEmpty) fetchGameList();
   }
 
+  UserController userController;
+
   final HomeRepository _repository;
-  GameList? gamesList;
-  UserListModel? userListModel;
+  List<GameData> gamesList = [];
+  // UserListModel? userListModel;
 
   fetchGameList() async {
     final res = await _repository.getGameList();
-    GameList? gameList = res.match<GameList?>(
+    GameList? list = res.match<GameList?>(
       (l) {
         log("${l?.res?.data}");
         log("${l?.res?.headers.toString()}");
@@ -29,23 +31,18 @@ class HomeController extends ChangeNotifier {
         return r;
       },
     );
-    gamesList = gameList;
-    notifyListeners();
-  }
-
-  fetchUserList() async {
-    final res = await _repository.getUserList();
-    UserListModel? userList = res.match<UserListModel?>(
-      (l) {
-        log("${l?.res?.data}");
-        log("${l?.res?.headers.toString()}");
-        return null;
-      },
-      (r) {
-        return r;
-      },
-    );
-    userListModel = userList;
+    if (list != null) {
+      gamesList = list.hydraMember;
+      final bulkUserList = [
+        ...gamesList.map((e) => e.player1 ?? "").toList(),
+        ...gamesList.map((e) => e.player2 ?? "").toList()
+      ];
+      for (String element in bulkUserList.toSet().toList()) {
+        if (element != "") {
+          userController.addUser(element);
+        }
+      }
+    }
     notifyListeners();
   }
 }

@@ -15,9 +15,12 @@ class HomepageScreen extends StatefulWidget {
 class _HomepageScreenState extends State<HomepageScreen> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) =>
-          HomeController(requestHandler: context.read<RequestHandler>()),
+    return ChangeNotifierProxyProvider<RequestHandler, HomeController>(
+      update: (context, value, previous) =>
+          HomeController(requestHandler: value, userController: context.read()),
+      create: (context) => HomeController(
+          requestHandler: context.read<RequestHandler>(),
+          userController: context.read()),
       builder: (context, child) => Scaffold(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
@@ -66,7 +69,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
                 ),
               ),
               Expanded(
-                child: (context.watch<HomeController>().gamesList != null)
+                child: (context.watch<HomeController>().gamesList.isNotEmpty)
                     ? Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
@@ -82,8 +85,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
                           scrollDirection: Axis.vertical,
                           children: context
                               .watch<HomeController>()
-                              .gamesList!
-                              .hydraMember!
+                              .gamesList
                               .map(
                                 (gameData) => GameCardWidget(
                                   gameData: gameData,

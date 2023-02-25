@@ -1,12 +1,14 @@
 import 'dart:convert';
-class User {
-  int id;
-  String context;
-  String idPath;
-  String type;
-  String email;
-  String name;
-  User({
+
+import 'package:equatable/equatable.dart';
+class User extends Equatable{
+  final int id;
+  final String context;
+  final String idPath;
+  final String type;
+  final String email;
+  final String name;
+  const User({
     required this.id,
     required this.context,
     required this.idPath,
@@ -64,26 +66,7 @@ class User {
   String toString() {
     return 'User(id: $id, context: $context, idPath: $idPath, type: $type, email: $email, name: $name)';
   }
-
+  
   @override
-  bool operator ==(covariant User other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id &&
-        other.context == context &&
-        other.idPath == idPath &&
-        other.type == type &&
-        other.email == email &&
-        other.name == name;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        context.hashCode ^
-        idPath.hashCode ^
-        type.hashCode ^
-        email.hashCode ^
-        name.hashCode;
-  }
+  List<Object?> get props => [idPath, id];
 }

@@ -17,7 +17,7 @@ class RequestHandler extends ChangeNotifier {
     if (userToken != null) updateToken(token: userToken!);
   }
 
-  final mainUrl = "https://tictactoe.stage.mcmhq.io/api";
+  final mainUrl = "https://tictactoe.stage.mcmhq.io";
   final Dio _dio;
   Dio get dio => _dio;
   final bool useLog;
@@ -36,28 +36,38 @@ class RequestHandler extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<AuthToken?> refreshToken() async {
+  Future<bool> refreshToken() async {
     log("#Refreshing TOKEN");
-    final res = await post(
-      "/token/refresh",
-      {"refresh_token": userToken!.refreshToken},
-      requireToken: false,
-    );
-    final AuthToken newToken = AuthToken.fromMap(res);
-    updateToken(token: newToken);
-    notifyListeners();
-    return newToken;
+    try {
+      final res = await post(
+        "/token/refresh",
+        {"refresh_token": userToken!.refreshToken},
+        requireToken: false,
+      );
+      final AuthToken newToken = AuthToken.fromMap(res);
+      updateToken(token: newToken);
+      notifyListeners();
+      return !JwtDecoder.isExpired(newToken.token);
+    } catch (e, s) {
+      log("##ERROR## Refreshing TOKEN", stackTrace: s);
+      userToken = null;
+      _secureStorage.delete(key: tokenKey);
+      notifyListeners();
+      return false;
+    }
   }
 
-  confirmSecureToken(bool tokenNeeded) async {
+  Future<bool> confirmSecureToken(bool tokenNeeded) async {
+    bool isSuccessful = true;
     if ((!hasToken || JwtDecoder.isExpired(userToken!.token)) && tokenNeeded) {
-      await refreshToken();
+      isSuccessful = await refreshToken();
     }
     if (tokenNeeded) {
       _dio.options.headers['Authorization'] = 'Bearer ${userToken!.token}';
     } else {
       _dio.options.headers.remove("Authorization");
     }
+    return isSuccessful;
   }
 
   Future post(
@@ -70,7 +80,8 @@ class RequestHandler extends ChangeNotifier {
     Map<String, dynamic>? queryParams,
   }) async {
     try {
-      await confirmSecureToken(requireToken);
+      bool proceed = await confirmSecureToken(requireToken);
+      if (!proceed) return Exception();
       final response = await dio.post(
         baseUrl ?? mainUrl + url,
         data: data,
@@ -112,7 +123,8 @@ class RequestHandler extends ChangeNotifier {
     Map<String, dynamic>? queryParams,
   }) async {
     try {
-      await confirmSecureToken(requireToken);
+      bool proceed = await confirmSecureToken(requireToken);
+      if (!proceed) return Exception();
       final response = await dio.get(
         baseUrl ?? mainUrl + url,
         options: options,
@@ -153,7 +165,8 @@ class RequestHandler extends ChangeNotifier {
   }) async {
     Response response;
     try {
-      await confirmSecureToken(requireToken);
+      bool proceed = await confirmSecureToken(requireToken);
+      if (!proceed) return Exception();
       response = await dio.put(
         baseUrl ?? mainUrl + url,
         data: data,

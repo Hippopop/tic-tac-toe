@@ -8,6 +8,7 @@ import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/token_model.dart';
 import 'package:tic_tac_toe/src/my_app.dart';
 import 'package:tic_tac_toe/src/services/data_source/request_handler.dart';
+import 'package:tic_tac_toe/src/services/data_source/user_provider/user_controller.dart';
 import 'package:tic_tac_toe/src/services/route/app_route.dart';
 
 void main() async {
@@ -45,10 +46,17 @@ void main() async {
             requestHandler: context.read(),
           ),
         ),
-        ChangeNotifierProvider(
+        ChangeNotifierProxyProvider<RequestHandler, RouteProvider>(
+          update: (context, value, previous) =>
+              RouteProvider(requestHandler: value),
           create: (context) => RouteProvider(
-            initialRoute:
-                context.read<RequestHandler>().hasToken ? "/home" : "/",
+            requestHandler: context.read<RequestHandler>(),
+          ),
+        ),
+        ChangeNotifierProxyProvider<RequestHandler, UserController>(
+          update: (context, value, previous) => UserController(requestHandler: value),
+          create: (context) => UserController(
+            requestHandler: context.read(),
           ),
         ),
       ],

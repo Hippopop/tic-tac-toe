@@ -2,7 +2,7 @@ class GameList {
   String? context;
   String? id;
   String? type;
-  List<GameData>? hydraMember;
+  List<GameData> hydraMember = [];
   int? hydraTotalItems;
   HydraView? hydraView;
   HydraSearch? hydraSearch;
@@ -11,7 +11,7 @@ class GameList {
       {this.context,
       this.id,
       this.type,
-      this.hydraMember,
+      required this.hydraMember,
       this.hydraTotalItems,
       this.hydraView,
       this.hydraSearch});
@@ -23,7 +23,7 @@ class GameList {
     if (json['hydra:member'] != null) {
       hydraMember = <GameData>[];
       json['hydra:member'].forEach((v) {
-        hydraMember!.add(GameData.fromMap(v));
+        hydraMember.add(GameData.fromMap(v));
       });
     }
     hydraTotalItems = json['hydra:totalItems'];
@@ -40,9 +40,8 @@ class GameList {
     mapData['@context'] = context;
     mapData['@id'] = id;
     mapData['@type'] = type;
-    if (hydraMember != null) {
-      mapData['hydra:member'] = hydraMember!.map((v) => v.toMap()).toList();
-    }
+    mapData['hydra:member'] = hydraMember.map((v) => v.toMap()).toList();
+
     mapData['hydra:totalItems'] = hydraTotalItems;
     if (hydraView != null) {
       mapData['hydra:view'] = hydraView!.toMap();
@@ -67,6 +66,15 @@ class GameData {
   String? finishedAt;
   List<Turns>? turns;
   String? currentTurnPlayer;
+
+  String? get winnerPath {
+    if (result == "Player 2") return player2;
+    if (result == "Player 1") return player1;
+    return null;
+  }
+
+  String get player1path => winnerPath ?? player1!;
+  String get player2path => (winnerPath == player2)? player1! : player2!;
 
   GameData(
       {this.idPath,
