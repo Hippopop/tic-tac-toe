@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:tic_tac_toe/src/features/auth/domain/auth_repository.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/token_model.dart';
 
 class RequestHandler extends ChangeNotifier {
@@ -24,6 +25,7 @@ class RequestHandler extends ChangeNotifier {
   final FlutterSecureStorage _secureStorage;
   FlutterSecureStorage get secureStorage => _secureStorage;
   static const tokenKey = "#AuthToken";
+  static const refreshTokenPath = "/api/token/refresh";
 
   AuthToken? userToken;
 
@@ -43,7 +45,7 @@ class RequestHandler extends ChangeNotifier {
     try {
       _dio.interceptors.clear();
       final res = await post(
-        "/api/token/refresh",
+        refreshTokenPath,
         {"refresh_token": userToken!.refreshToken},
         requireToken: false,
       );
@@ -73,26 +75,12 @@ class RequestHandler extends ChangeNotifier {
     return isSuccessful;
   }
 
-  handleError(DioError err, ErrorInterceptorHandler handler) async {
-    try {
-      log("#TRYING TO RESOLVE");
-      await refreshToken();
-      final req = await _dio.request(
-        err.requestOptions.path,
-        options: Options(
-            method: err.requestOptions.method,
-            headers: err.requestOptions.headers),
-        data: err.requestOptions.data,
-        queryParameters: err.requestOptions.queryParameters,
-      );
-      handler.resolve(req);
-    } catch (e, s) {
-      log("##ERROR## Refreshing TOKEN", stackTrace: s);
-      userToken = null;
-      _secureStorage.delete(key: tokenKey);
-      notifyListeners();
-      return false;
-    }
+  handleError() async {
+    log("##ERROR## Refreshing TOKEN");
+    userToken = null;
+    _secureStorage.delete(key: tokenKey);
+    notifyListeners();
+    return false;
   }
 
   Future post(
@@ -248,7 +236,7 @@ class RequestException implements Exception {
   }) {
     if (useLog) {
       log(
-        "method: \"$method\"\nerrorMsg: \"$msg\"\nurl: \"$url\"\ndata: ${data.toString()}\n ${res?.data.toString()}",
+        "method: \"$method\"\nerrorMsg: \"$msg\"\nurl: \"$url\"\ndata: ${data.toString()}\nresponse: ${res?.data.toString()}",
         name: "#RequestException",
         time: DateTime.now(),
         error: error,
@@ -263,8 +251,12 @@ class InterceptDio extends Interceptor {
   final Function handleError;
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
-    if (err.type == DioErrorType.response && err.response?.statusCode == 401) {
-      await handleError(err, handler);
+    log(err.requestOptions.path);
+    if (err.type == DioErrorType.response &&
+        err.response?.statusCode == 401 &&
+        err.requestOptions.path !=
+            "https://tictactoe.stage.mcmhq.io/api/authentication_token") {
+      await handleError();
     } else {
       super.onError(err, handler);
     }

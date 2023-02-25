@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-class User extends Equatable{
+
+class User extends Equatable {
   final int id;
   final String context;
   final String idPath;
@@ -48,7 +49,7 @@ class User extends Equatable{
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      context: map['@context'] as String,
+      context: (map['@context'] != null) ? (map['@context'] as String) : "",
       idPath: map['@id'] as String,
       type: map['@type'] as String,
       id: map['id'] as int,
@@ -66,7 +67,7 @@ class User extends Equatable{
   String toString() {
     return 'User(id: $id, context: $context, idPath: $idPath, type: $type, email: $email, name: $name)';
   }
-  
+
   @override
-  List<Object?> get props => [idPath, id];
+  List<Object?> get props => [idPath, id, name, email];
 }

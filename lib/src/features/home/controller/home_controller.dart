@@ -38,7 +38,7 @@ class HomeController extends ChangeNotifier {
       ];
       for (String element in bulkUserList.toSet().toList()) {
         if (element != "") {
-          await userController.addUser(element);
+          await userController.addUserByPath(element);
         }
       }
       notifyListeners();

@@ -36,7 +36,7 @@ class GameRepository {
     return TaskEither.tryCatch(() async {
       final res = await requestHandler.post(
         turnPath,
-        {"x": offset.dx, "y": offset.dy, "game": gamePath},
+        {"x": offset.dx.toInt(), "y": offset.dy.toInt(), "game": gamePath},
       );
       return Turns.fromMap(res);
     }, (error, stackTrace) {

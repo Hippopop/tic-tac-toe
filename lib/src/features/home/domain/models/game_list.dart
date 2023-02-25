@@ -72,8 +72,8 @@ class GameData extends Equatable {
 
   final _format = DateFormat("yyyy-MM-ddTHH:mm:ss+");
 
-  DateTime get createTime => _format.parse(createdAt ?? "");
-  DateTime get finishTime => _format.parse(finishedAt ?? "");
+  DateTime? get createTime => (createdAt == null)? null : _format.parse(createdAt ?? "");
+  DateTime? get finishTime => (finishedAt == null)? null :_format.parse(finishedAt ?? "");
 
   String? get winnerPath {
     if (result == "Player 2") return player2;

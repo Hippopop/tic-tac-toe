@@ -35,7 +35,7 @@ class BottomBar extends StatelessWidget {
                       },
                       icon: const Icon(
                         Icons.home_outlined,
-                        color: Colors.black,
+                        color: Colors.black, 
                         size: 24,
                       ),
                     ),

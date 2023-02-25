@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
-import 'package:tic_tac_toe/src/features/auth/domain/models/user_model.dart';
 import 'package:tic_tac_toe/src/features/game/controller/game_controller.dart';
 import 'package:tic_tac_toe/src/features/game/view/widgets/game_box.dart';
 import 'package:tic_tac_toe/src/features/home/view/widgets/bottom_bar.dart';
@@ -20,19 +20,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-
-  bool isPlayer(BuildContext context) {
-    User? me = context.read<AuthController>().currentUser;
-    if (me == null || context.read<GameController>().currentGame == null) {
-      return false;
-    }
-    return me.idPath == context.read<GameController>().currentGame?.player1 ||
-        me.idPath == context.read<GameController>().currentGame?.player2;
-  }
-
   final DateFormat format = DateFormat("h:mm:s a");
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +29,8 @@ class _GameScreenState extends State<GameScreen> {
           previous!..updateRequestHandler(value),
       create: (context) => GameController(
           requestHandler: context.read<RequestHandler>(),
-          gameId: int.tryParse(widget.gameId) ?? 0),
+          gameId: int.tryParse(widget.gameId) ?? 0,
+          me: context.read<AuthController>().currentUser!),
       builder: (context, child) => Scaffold(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
@@ -63,11 +52,15 @@ class _GameScreenState extends State<GameScreen> {
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                       child: Text(
-                        (context.read<GameController>().currentGame != null)
+                        (/* context.read<GameController>().currentGame != null &&  */ context
+                                    .read<GameController>()
+                                    .currentGame
+                                    ?.createTime !=
+                                null)
                             ? format.format(context
                                 .read<GameController>()
                                 .currentGame!
-                                .createTime)
+                                .createTime!)
                             : "",
                         style: FlutterFlowTheme.of(context).bodyText1,
                       ),
@@ -87,11 +80,15 @@ class _GameScreenState extends State<GameScreen> {
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                       child: Text(
-                        (context.read<GameController>().currentGame != null)
+                        (context
+                                    .read<GameController>()
+                                    .currentGame
+                                    ?.finishTime !=
+                                null)
                             ? format.format(context
                                 .read<GameController>()
                                 .currentGame!
-                                .finishTime)
+                                .finishTime!)
                             : "",
                         style: FlutterFlowTheme.of(context).bodyText1,
                       ),
@@ -105,13 +102,13 @@ class _GameScreenState extends State<GameScreen> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      'Time Remaining:',
+                      'Game :',
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                       child: Text(
-                        '0',
+                        "${context.watch<GameController>().currentGame?.id}",
                         style: FlutterFlowTheme.of(context).bodyText1,
                       ),
                     ),
@@ -119,12 +116,19 @@ class _GameScreenState extends State<GameScreen> {
                 ),
               ),
               Expanded(
-                child: AbsorbPointer(
-                  absorbing: !isPlayer(context),
-                  child: GameBox(
-                    turns: context.watch<GameController>().currentGame?.turns ??
-                        [],
-                  ),
+                child: Consumer<GameController>(
+                  builder: (context, value, child) {
+                    log("isPlayer ${value.isPlayer}");
+                    log("isTurn ${value.isTurn}");
+                    return AbsorbPointer(
+                    absorbing: !value.isPlayer,
+                    child: GameBox(
+                      turns: value.currentGame?.turns ?? [],
+                      refresh: (value.isPlayer && !value.isTurn),
+                    ),
+                  );
+                  },
+                  // child: ,
                 ),
               ),
               const BottomBar(),

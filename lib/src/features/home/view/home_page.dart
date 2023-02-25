@@ -45,25 +45,28 @@ class _HomepageScreenState extends State<HomepageScreen> {
                     ? Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
-                        child: GridView(
-                          padding: EdgeInsets.zero,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 8,
-                            childAspectRatio: 0.75,
+                        child: RefreshIndicator(
+                          onRefresh: () async => await context.read<HomeController>().fetchGameList(),
+                          child: GridView(
+                            padding: EdgeInsets.zero,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
+                              childAspectRatio: 0.75,
+                            ),
+                            scrollDirection: Axis.vertical,
+                            children: context
+                                .watch<HomeController>()
+                                .gamesList
+                                .map(
+                                  (gameData) => GameCardWidget(
+                                    gameData: gameData,
+                                  ),
+                                )
+                                .toList(),
                           ),
-                          scrollDirection: Axis.vertical,
-                          children: context
-                              .watch<HomeController>()
-                              .gamesList
-                              .map(
-                                (gameData) => GameCardWidget(
-                                  gameData: gameData,
-                                ),
-                              )
-                              .toList(),
                         ),
                       )
                     : const Center(

@@ -15,7 +15,7 @@ class UserController extends ChangeNotifier {
   final UserRepository _repository;
   List<User> userList = [];
 
-  addUser(String idPath) async {
+  addUserByPath(String idPath) async {
     bool hasUser = userList.any((element) => element.idPath == idPath);
     if (!hasUser) {
       User? newUser = await fetchUserByPath(idPath);
@@ -24,18 +24,34 @@ class UserController extends ChangeNotifier {
     notifyListeners();
   }
 
+  addUser(User user) {
+    bool hasUser = userList.any((element) => element.id == user.id);
+    if (hasUser) {
+      if (user != userList.firstWhere((element) => element.id == user.id)) {
+        int index = userList
+            .indexOf(userList.firstWhere((element) => element.id == user.id));
+        userList[index] = user;
+        notifyListeners();
+      }
+    } else {
+      userList.add(user);
+      notifyListeners();
+    }
+  }
+
   User? getUserByPath(String idPath) {
     if (userList.any((element) => element.idPath == idPath)) {
       return userList.firstWhere((element) => element.idPath == idPath);
     } else {
-      addUser(idPath);
+      addUserByPath(idPath);
       return null;
     }
   }
 
-  fetchUserList() async {
-    final res = await _repository.getUserList();
-    UserListModel? userList = res.match<UserListModel?>(
+  fetchUserList(String? query) async {
+    log("Q: $query");
+    final res = await _repository.getUserList(query: query);
+    UserListModel? newUserList = res.match<UserListModel?>(
       (l) {
         log("${l?.res?.data}");
         log("${l?.res?.headers.toString()}");
@@ -45,6 +61,12 @@ class UserController extends ChangeNotifier {
         return r;
       },
     );
+    if (newUserList != null && newUserList.hydraMember.isNotEmpty) {
+      log("Member ${newUserList.hydraMember}");
+      for (User a in newUserList.hydraMember) {
+        addUser(a);
+      }
+    }
     notifyListeners();
   }
 

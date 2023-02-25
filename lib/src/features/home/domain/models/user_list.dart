@@ -4,7 +4,7 @@ class UserListModel {
   String? context;
   String? id;
   String? type;
-  List<User>? hydraMember;
+  List<User> hydraMember = [];
   int? hydraTotalItems;
   HydraView? hydraView;
   HydraSearch? hydraSearch;
@@ -13,7 +13,7 @@ class UserListModel {
       {this.context,
       this.id,
       this.type,
-      this.hydraMember,
+      this.hydraMember = const [],
       this.hydraTotalItems,
       this.hydraView,
       this.hydraSearch});
@@ -25,7 +25,7 @@ class UserListModel {
     if (json['hydra:member'] != null) {
       hydraMember = <User>[];
       json['hydra:member'].forEach((v) {
-        hydraMember!.add(User.fromMap(v));
+        hydraMember.add(User.fromMap(v));
       });
     }
     hydraTotalItems = json['hydra:totalItems'];
@@ -42,9 +42,7 @@ class UserListModel {
     mapData['@context'] = context;
     mapData['@id'] = id;
     mapData['@type'] = type;
-    if (hydraMember != null) {
-      mapData['hydra:member'] = hydraMember!.map((v) => v.toMap()).toList();
-    }
+    mapData['hydra:member'] = hydraMember.map((v) => v.toMap()).toList();
     mapData['hydra:totalItems'] = hydraTotalItems;
     if (hydraView != null) {
       mapData['hydra:view'] = hydraView!.toMap();
