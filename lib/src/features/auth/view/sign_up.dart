@@ -164,6 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Expanded(
                             child: TextFormField(
+                              focusNode: _passNode,
                               controller: _passController,
                               obscureText: obsecure,
                               onFieldSubmitted: (value) => onSubmit(context),

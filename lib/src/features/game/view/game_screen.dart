@@ -51,7 +51,7 @@ class _GameScreenState extends State<GameScreen> {
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                       child: Text(
-                        (/* context.read<GameController>().currentGame != null &&  */ context
+                        (context
                                     .read<GameController>()
                                     .currentGame
                                     ?.createTime !=

@@ -126,8 +126,11 @@ class _EditScreenState extends State<EditScreen> {
                         children: [
                           Expanded(
                             child: TextFormField(
+                              focusNode: _passNode,
                               controller: _passController,
                               obscureText: obsecure,
+                              onFieldSubmitted: (text) =>
+                                  onSubmit(context, value),
                               decoration: InputDecoration(
                                 labelText: 'Password',
                                 labelStyle:
