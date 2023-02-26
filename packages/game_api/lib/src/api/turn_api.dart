@@ -11,7 +11,6 @@ import 'package:openapi/src/model/turn_jsonld_game_read.dart';
 import 'package:openapi/src/model/turn_jsonld_turn_create.dart';
 
 class TurnApi {
-
   final Dio _dio;
 
   final Serializers _serializers;
@@ -32,7 +31,7 @@ class TurnApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TurnJsonldGameRead] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<TurnJsonldGameRead>> apiTurnsPost({ 
+  Future<Response<TurnJsonldGameRead>> apiTurnsPost({
     required TurnJsonldTurnCreate turnJsonldTurnCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -65,11 +64,11 @@ class TurnApi {
 
     try {
       const _type = FullType(TurnJsonldTurnCreate);
-      _bodyData = _serializers.serialize(turnJsonldTurnCreate, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData =
+          _serializers.serialize(turnJsonldTurnCreate, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -95,7 +94,6 @@ class TurnApi {
         _response.data!,
         specifiedType: _responseType,
       ) as TurnJsonldGameRead;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -116,5 +114,4 @@ class TurnApi {
       extra: _response.extra,
     );
   }
-
 }

@@ -8,14 +8,15 @@ import 'package:built_value/serializer.dart';
 
 part 'turn_jsonld_turn_create.g.dart';
 
-/// 
+///
 ///
 /// Properties:
-/// * [x] 
-/// * [y] 
-/// * [game] 
+/// * [x]
+/// * [y]
+/// * [game]
 @BuiltValue()
-abstract class TurnJsonldTurnCreate implements Built<TurnJsonldTurnCreate, TurnJsonldTurnCreateBuilder> {
+abstract class TurnJsonldTurnCreate
+    implements Built<TurnJsonldTurnCreate, TurnJsonldTurnCreateBuilder> {
   @BuiltValueField(wireName: r'x')
   int? get x;
 
@@ -27,18 +28,24 @@ abstract class TurnJsonldTurnCreate implements Built<TurnJsonldTurnCreate, TurnJ
 
   TurnJsonldTurnCreate._();
 
-  factory TurnJsonldTurnCreate([void updates(TurnJsonldTurnCreateBuilder b)]) = _$TurnJsonldTurnCreate;
+  factory TurnJsonldTurnCreate([void updates(TurnJsonldTurnCreateBuilder b)]) =
+      _$TurnJsonldTurnCreate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TurnJsonldTurnCreateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TurnJsonldTurnCreate> get serializer => _$TurnJsonldTurnCreateSerializer();
+  static Serializer<TurnJsonldTurnCreate> get serializer =>
+      _$TurnJsonldTurnCreateSerializer();
 }
 
-class _$TurnJsonldTurnCreateSerializer implements PrimitiveSerializer<TurnJsonldTurnCreate> {
+class _$TurnJsonldTurnCreateSerializer
+    implements PrimitiveSerializer<TurnJsonldTurnCreate> {
   @override
-  final Iterable<Type> types = const [TurnJsonldTurnCreate, _$TurnJsonldTurnCreate];
+  final Iterable<Type> types = const [
+    TurnJsonldTurnCreate,
+    _$TurnJsonldTurnCreate
+  ];
 
   @override
   final String wireName = r'TurnJsonldTurnCreate';
@@ -49,20 +56,26 @@ class _$TurnJsonldTurnCreateSerializer implements PrimitiveSerializer<TurnJsonld
     FullType specifiedType = FullType.unspecified,
   }) sync* {
     yield r'x';
-    yield object.x == null ? null : serializers.serialize(
-      object.x,
-      specifiedType: const FullType.nullable(int),
-    );
+    yield object.x == null
+        ? null
+        : serializers.serialize(
+            object.x,
+            specifiedType: const FullType.nullable(int),
+          );
     yield r'y';
-    yield object.y == null ? null : serializers.serialize(
-      object.y,
-      specifiedType: const FullType.nullable(int),
-    );
+    yield object.y == null
+        ? null
+        : serializers.serialize(
+            object.y,
+            specifiedType: const FullType.nullable(int),
+          );
     yield r'game';
-    yield object.game == null ? null : serializers.serialize(
-      object.game,
-      specifiedType: const FullType.nullable(String),
-    );
+    yield object.game == null
+        ? null
+        : serializers.serialize(
+            object.game,
+            specifiedType: const FullType.nullable(String),
+          );
   }
 
   @override
@@ -71,7 +84,9 @@ class _$TurnJsonldTurnCreateSerializer implements PrimitiveSerializer<TurnJsonld
     TurnJsonldTurnCreate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -138,4 +153,3 @@ class _$TurnJsonldTurnCreateSerializer implements PrimitiveSerializer<TurnJsonld
     return result.build();
   }
 }
-

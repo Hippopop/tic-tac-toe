@@ -14,7 +14,6 @@ import 'package:openapi/src/model/user_jsonld_user_read.dart';
 import 'package:openapi/src/model/user_jsonld_user_update.dart';
 
 class UserApi {
-
   final Dio _dio;
 
   final Serializers _serializers;
@@ -26,7 +25,7 @@ class UserApi {
   ///
   /// Parameters:
   /// * [page] - The collection page number
-  /// * [name] - 
+  /// * [name] -
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -36,7 +35,7 @@ class UserApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ApiUsersGetCollection200Response] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<ApiUsersGetCollection200Response>> apiUsersGetCollection({ 
+  Future<Response<ApiUsersGetCollection200Response>> apiUsersGetCollection({
     int? page = 1,
     String? name,
     CancelToken? cancelToken,
@@ -66,8 +65,11 @@ class UserApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (page != null) r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (name != null) r'name': encodeQueryParameter(_serializers, name, const FullType(String)),
+      if (page != null)
+        r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
+      if (name != null)
+        r'name':
+            encodeQueryParameter(_serializers, name, const FullType(String)),
     };
 
     final _response = await _dio.request<Object>(
@@ -87,7 +89,6 @@ class UserApi {
         _response.data!,
         specifiedType: _responseType,
       ) as ApiUsersGetCollection200Response;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -123,7 +124,7 @@ class UserApi {
   ///
   /// Returns a [Future] containing a [Response] with a [UserJsonldUserRead] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<UserJsonldUserRead>> apiUsersIdGet({ 
+  Future<Response<UserJsonldUserRead>> apiUsersIdGet({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -167,7 +168,6 @@ class UserApi {
         _response.data!,
         specifiedType: _responseType,
       ) as UserJsonldUserRead;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -204,7 +204,7 @@ class UserApi {
   ///
   /// Returns a [Future] containing a [Response] with a [UserJsonldUserRead] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<UserJsonldUserRead>> apiUsersIdPut({ 
+  Future<Response<UserJsonldUserRead>> apiUsersIdPut({
     required String id,
     required UserJsonldUserUpdate userJsonldUserUpdate,
     CancelToken? cancelToken,
@@ -238,11 +238,11 @@ class UserApi {
 
     try {
       const _type = FullType(UserJsonldUserUpdate);
-      _bodyData = _serializers.serialize(userJsonldUserUpdate, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData =
+          _serializers.serialize(userJsonldUserUpdate, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -268,7 +268,6 @@ class UserApi {
         _response.data!,
         specifiedType: _responseType,
       ) as UserJsonldUserRead;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -304,7 +303,7 @@ class UserApi {
   ///
   /// Returns a [Future] containing a [Response] with a [UserJsonldUserRead] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<UserJsonldUserRead>> apiUsersPost({ 
+  Future<Response<UserJsonldUserRead>> apiUsersPost({
     required UserJsonldUserCreate userJsonldUserCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -337,11 +336,11 @@ class UserApi {
 
     try {
       const _type = FullType(UserJsonldUserCreate);
-      _bodyData = _serializers.serialize(userJsonldUserCreate, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData =
+          _serializers.serialize(userJsonldUserCreate, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -367,7 +366,6 @@ class UserApi {
         _response.data!,
         specifiedType: _responseType,
       ) as UserJsonldUserRead;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -388,5 +386,4 @@ class UserApi {
       extra: _response.extra,
     );
   }
-
 }

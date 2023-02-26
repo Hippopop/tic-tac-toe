@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -54,8 +52,9 @@ void main() async {
           ),
         ),
         ChangeNotifierProxyProvider<RequestHandler, UserController>(
-          update: (context, value, previous) => UserController(requestHandler: value),
           lazy: false,
+          update: (context, value, previous) =>
+              UserController(requestHandler: value),
           create: (context) => UserController(
             requestHandler: context.read(),
           ),

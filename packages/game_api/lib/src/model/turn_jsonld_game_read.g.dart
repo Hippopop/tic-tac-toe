@@ -28,7 +28,7 @@ class _$TurnJsonldGameRead extends TurnJsonldGameRead {
 
   factory _$TurnJsonldGameRead(
           [void Function(TurnJsonldGameReadBuilder)? updates]) =>
-      (new TurnJsonldGameReadBuilder()..update(updates))._build();
+      (TurnJsonldGameReadBuilder()..update(updates))._build();
 
   _$TurnJsonldGameRead._(
       {this.atContext,
@@ -49,7 +49,7 @@ class _$TurnJsonldGameRead extends TurnJsonldGameRead {
 
   @override
   TurnJsonldGameReadBuilder toBuilder() =>
-      new TurnJsonldGameReadBuilder()..replace(this);
+      TurnJsonldGameReadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -104,7 +104,7 @@ class TurnJsonldGameReadBuilder
 
   GameJsonldGameReadContextBuilder? _atContext;
   GameJsonldGameReadContextBuilder get atContext =>
-      _$this._atContext ??= new GameJsonldGameReadContextBuilder();
+      _$this._atContext ??= GameJsonldGameReadContextBuilder();
   set atContext(GameJsonldGameReadContextBuilder? atContext) =>
       _$this._atContext = atContext;
 
@@ -179,7 +179,7 @@ class TurnJsonldGameReadBuilder
     _$TurnJsonldGameRead _$result;
     try {
       _$result = _$v ??
-          new _$TurnJsonldGameRead._(
+          _$TurnJsonldGameRead._(
               atContext: _atContext?.build(),
               atId: atId,
               atType: atType,
@@ -195,7 +195,7 @@ class TurnJsonldGameReadBuilder
         _$failedField = 'atContext';
         _atContext?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'TurnJsonldGameRead', _$failedField, e.toString());
       }
       rethrow;

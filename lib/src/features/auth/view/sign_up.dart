@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/user_model.dart';
 import 'package:tic_tac_toe/src/features/auth/view/widgets/button_widget.dart';
+import 'package:tic_tac_toe/src/features/global/widgets/base_text_field.dart';
 import 'package:tic_tac_toe/src/services/theme/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,17 +18,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _nameController;
   late final TextEditingController _passController;
+  late final FocusNode _emailNode;
+  late final FocusNode _nameNode;
+  late final FocusNode _passNode;
   User? currentUser;
   bool obsecure = true;
 
   @override
   void initState() {
     super.initState();
+    _emailNode = FocusNode();
+    _nameNode = FocusNode();
+    _passNode = FocusNode();
     _emailController = TextEditingController();
     _nameController = TextEditingController();
     _passController = TextEditingController();
     currentUser = context.read<AuthController>().currentUser;
     _nameController.text = currentUser?.name ?? "";
+  }
+
+  @override
+  void dispose() {
+    _emailNode.dispose();
+    _nameNode.dispose();
+    _passNode.dispose();
+    _emailController.dispose();
+    _nameController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
+
+  onSubmit(BuildContext context) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Colors.red,
+        content:
+            Text("This feature is implemented, But the API isn't functioning."),
+      ),
+    );
+    /* await value.createNewUser(
+       email: _emailController.text,
+       name: _nameController.text,
+        pass: _passController.text,
+        onCreate: (msg) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(msg),
+            ),
+          );
+        },
+      ); */
   }
 
   @override
@@ -74,59 +115,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: TextFormField(
+                            child: BaseTextField(
+                              labelText: 'Email',
+                              hintText: 'Enter your email here...',
+                              myFocusNode: _emailNode,
+                              nextFocusNode: _nameNode,
                               controller: _emailController,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Email',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                hintText: 'Enter your email here...',
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                filled: true,
-                                errorText: value.currentViolations
-                                    .where((element) =>
-                                        element.propertyPath == "email")
-                                    .firstOrNull
-                                    ?.message,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                contentPadding:
-                                    const EdgeInsetsDirectional.fromSTEB(
-                                        16, 24, 0, 24),
-                              ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                              maxLines: null,
+                              errorText: value.currentViolations
+                                  .where((element) =>
+                                      element.propertyPath == "email")
+                                  .firstOrNull
+                                  ?.message,
                             ),
                           ),
                         ],
@@ -140,59 +139,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: TextFormField(
+                            child: BaseTextField(
+                              labelText: 'Name',
+                              hintText: 'Enter your name here...',
+                              myFocusNode: _nameNode,
+                              nextFocusNode: _passNode,
                               controller: _nameController,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Name',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                hintText: 'Enter your name here...',
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                filled: true,
-                                errorText: value.currentViolations
-                                    .where((element) =>
-                                        element.propertyPath == "name")
-                                    .firstOrNull
-                                    ?.message,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                contentPadding:
-                                    const EdgeInsetsDirectional.fromSTEB(
-                                        16, 24, 0, 24),
-                              ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                              maxLines: null,
+                              errorText: value.currentViolations
+                                  .where((element) =>
+                                      element.propertyPath == "name")
+                                  .firstOrNull
+                                  ?.message,
                             ),
                           ),
                         ],
@@ -207,8 +164,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Expanded(
                             child: TextFormField(
+                              focusNode: _passNode,
                               controller: _passController,
                               obscureText: obsecure,
+                              onFieldSubmitted: (value) => onSubmit(context),
                               decoration: InputDecoration(
                                 labelText: 'Password',
                                 labelStyle:
@@ -289,28 +248,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FFButtonWidget(
-                      onPressed: () async {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            backgroundColor: Colors.red,
-                            content: Text(
-                                "This feature is implemented, But the API isn't functioning."),
-                          ),
-                        );
-                        /* await value.createNewUser(
-                          email: _emailController.text,
-                          name: _nameController.text,
-                          pass: _passController.text,
-                          onCreate: (msg) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text(msg),
-                              ),
-                            );
-                          },
-                        ); */
-                      },
+                      onPressed: () => onSubmit(context),
                       text: 'Register',
                       options: FFButtonOptions(
                         width: 130,

@@ -16,7 +16,6 @@ class HomeRepository {
     requestHandler = newRH;
   }
 
-
   Future<Either<RequestException?, GameList>> getGameList() async {
     return TaskEither.tryCatch(() async {
       final res = await requestHandler.get(

@@ -19,7 +19,7 @@ class _$ApiGamesGetCollection200Response
 
   factory _$ApiGamesGetCollection200Response(
           [void Function(ApiGamesGetCollection200ResponseBuilder)? updates]) =>
-      (new ApiGamesGetCollection200ResponseBuilder()..update(updates))._build();
+      (ApiGamesGetCollection200ResponseBuilder()..update(updates))._build();
 
   _$ApiGamesGetCollection200Response._(
       {required this.hydraColonMember,
@@ -38,7 +38,7 @@ class _$ApiGamesGetCollection200Response
 
   @override
   ApiGamesGetCollection200ResponseBuilder toBuilder() =>
-      new ApiGamesGetCollection200ResponseBuilder()..replace(this);
+      ApiGamesGetCollection200ResponseBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -80,7 +80,7 @@ class ApiGamesGetCollection200ResponseBuilder
 
   ListBuilder<GameJsonldGameRead>? _hydraColonMember;
   ListBuilder<GameJsonldGameRead> get hydraColonMember =>
-      _$this._hydraColonMember ??= new ListBuilder<GameJsonldGameRead>();
+      _$this._hydraColonMember ??= ListBuilder<GameJsonldGameRead>();
   set hydraColonMember(ListBuilder<GameJsonldGameRead>? hydraColonMember) =>
       _$this._hydraColonMember = hydraColonMember;
 
@@ -92,7 +92,7 @@ class ApiGamesGetCollection200ResponseBuilder
   ApiGamesGetCollection200ResponseHydraViewBuilder? _hydraColonView;
   ApiGamesGetCollection200ResponseHydraViewBuilder get hydraColonView =>
       _$this._hydraColonView ??=
-          new ApiGamesGetCollection200ResponseHydraViewBuilder();
+          ApiGamesGetCollection200ResponseHydraViewBuilder();
   set hydraColonView(
           ApiGamesGetCollection200ResponseHydraViewBuilder? hydraColonView) =>
       _$this._hydraColonView = hydraColonView;
@@ -100,7 +100,7 @@ class ApiGamesGetCollection200ResponseBuilder
   ApiGamesGetCollection200ResponseHydraSearchBuilder? _hydraColonSearch;
   ApiGamesGetCollection200ResponseHydraSearchBuilder get hydraColonSearch =>
       _$this._hydraColonSearch ??=
-          new ApiGamesGetCollection200ResponseHydraSearchBuilder();
+          ApiGamesGetCollection200ResponseHydraSearchBuilder();
   set hydraColonSearch(
           ApiGamesGetCollection200ResponseHydraSearchBuilder?
               hydraColonSearch) =>
@@ -140,7 +140,7 @@ class ApiGamesGetCollection200ResponseBuilder
     _$ApiGamesGetCollection200Response _$result;
     try {
       _$result = _$v ??
-          new _$ApiGamesGetCollection200Response._(
+          _$ApiGamesGetCollection200Response._(
               hydraColonMember: hydraColonMember.build(),
               hydraColonTotalItems: hydraColonTotalItems,
               hydraColonView: _hydraColonView?.build(),
@@ -156,7 +156,7 @@ class ApiGamesGetCollection200ResponseBuilder
         _$failedField = 'hydraColonSearch';
         _hydraColonSearch?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'ApiGamesGetCollection200Response', _$failedField, e.toString());
       }
       rethrow;

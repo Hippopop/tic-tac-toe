@@ -18,13 +18,11 @@ class BottomBar extends StatelessWidget {
             child: Container(
               width: 100,
               decoration: BoxDecoration(
-                color:
-                    FlutterFlowTheme.of(context).secondaryBackground,
+                color: FlutterFlowTheme.of(context).secondaryBackground,
                 borderRadius: BorderRadius.circular(60),
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                    16, 16, 16, 16),
+                padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -35,7 +33,7 @@ class BottomBar extends StatelessWidget {
                       },
                       icon: const Icon(
                         Icons.home_outlined,
-                        color: Colors.black, 
+                        color: Colors.black,
                         size: 24,
                       ),
                     ),

@@ -22,7 +22,7 @@ class _$UserJsonldUserRead extends UserJsonldUserRead {
 
   factory _$UserJsonldUserRead(
           [void Function(UserJsonldUserReadBuilder)? updates]) =>
-      (new UserJsonldUserReadBuilder()..update(updates))._build();
+      (UserJsonldUserReadBuilder()..update(updates))._build();
 
   _$UserJsonldUserRead._(
       {this.atContext, this.atId, this.atType, this.id, this.email, this.name})
@@ -35,7 +35,7 @@ class _$UserJsonldUserRead extends UserJsonldUserRead {
 
   @override
   UserJsonldUserReadBuilder toBuilder() =>
-      new UserJsonldUserReadBuilder()..replace(this);
+      UserJsonldUserReadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -81,7 +81,7 @@ class UserJsonldUserReadBuilder
 
   GameJsonldGameReadContextBuilder? _atContext;
   GameJsonldGameReadContextBuilder get atContext =>
-      _$this._atContext ??= new GameJsonldGameReadContextBuilder();
+      _$this._atContext ??= GameJsonldGameReadContextBuilder();
   set atContext(GameJsonldGameReadContextBuilder? atContext) =>
       _$this._atContext = atContext;
 
@@ -141,7 +141,7 @@ class UserJsonldUserReadBuilder
     _$UserJsonldUserRead _$result;
     try {
       _$result = _$v ??
-          new _$UserJsonldUserRead._(
+          _$UserJsonldUserRead._(
               atContext: _atContext?.build(),
               atId: atId,
               atType: atType,
@@ -154,7 +154,7 @@ class UserJsonldUserReadBuilder
         _$failedField = 'atContext';
         _atContext?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'UserJsonldUserRead', _$failedField, e.toString());
       }
       rethrow;

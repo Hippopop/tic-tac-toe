@@ -11,7 +11,7 @@ class _$RefreshToken extends RefreshToken {
   final String? refreshToken;
 
   factory _$RefreshToken([void Function(RefreshTokenBuilder)? updates]) =>
-      (new RefreshTokenBuilder()..update(updates))._build();
+      (RefreshTokenBuilder()..update(updates))._build();
 
   _$RefreshToken._({this.refreshToken}) : super._();
 
@@ -20,7 +20,7 @@ class _$RefreshToken extends RefreshToken {
       (toBuilder()..update(updates)).build();
 
   @override
-  RefreshTokenBuilder toBuilder() => new RefreshTokenBuilder()..replace(this);
+  RefreshTokenBuilder toBuilder() => RefreshTokenBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -80,7 +80,7 @@ class RefreshTokenBuilder
   RefreshToken build() => _build();
 
   _$RefreshToken _build() {
-    final _$result = _$v ?? new _$RefreshToken._(refreshToken: refreshToken);
+    final _$result = _$v ?? _$RefreshToken._(refreshToken: refreshToken);
     replace(_$result);
     return _$result;
   }

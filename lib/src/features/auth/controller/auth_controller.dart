@@ -94,14 +94,14 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
   }
 
-  ///!NOTE: This api, responds with
-  ///```dart
+  ///`NOTE`: This api, responds with
+  ///```json
   ///{
-  /// 	"code": 401,
-  /// 	"message": "JWT Token not found"
+  /// "code": 401,
+  /// "message": "JWT Token not found"
   /// }
-  /// ```
-  ///But A new user user won't have a pre-existing token.
+  ///```
+  ///But a new user won't have a pre-existing token.
   createNewUser({
     required String email,
     required String name,

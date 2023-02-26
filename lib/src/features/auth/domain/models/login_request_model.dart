@@ -7,14 +7,12 @@ class LoginRequest {
   })  : _email = email,
         _password = password;
 
-
   String _email;
   String _password;
   get email => _email;
   set email(value) => _email = value;
   get password => _password;
   set password(value) => _password = value;
-
 
   LoginRequest copyWith({
     String? email,

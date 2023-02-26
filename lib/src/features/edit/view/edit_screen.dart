@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/user_model.dart';
 import 'package:tic_tac_toe/src/features/auth/view/widgets/button_widget.dart';
+import 'package:tic_tac_toe/src/features/global/widgets/base_text_field.dart';
 import 'package:tic_tac_toe/src/services/theme/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -16,16 +17,44 @@ class EditScreen extends StatefulWidget {
 class _EditScreenState extends State<EditScreen> {
   late final TextEditingController _nameController;
   late final TextEditingController _passController;
+  late final FocusNode _nameNode;
+  late final FocusNode _passNode;
   User? currentUser;
   bool obsecure = true;
 
   @override
   void initState() {
     super.initState();
+    _nameNode = FocusNode();
+    _passNode = FocusNode();
     _nameController = TextEditingController();
     _passController = TextEditingController();
     currentUser = context.read<AuthController>().currentUser;
     _nameController.text = currentUser?.name ?? "";
+  }
+
+  @override
+  void dispose() {
+    _nameNode.dispose();
+    _passNode.dispose();
+    _nameController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
+
+  onSubmit(BuildContext context, AuthController value) async {
+    await value.updateCurrentUser(
+      name: _nameController.text,
+      pass: _passController.text,
+      onUpdate: (msg) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(msg),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -72,59 +101,17 @@ class _EditScreenState extends State<EditScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: TextFormField(
+                            child: BaseTextField(
+                              labelText: "Name",
+                              hintText: 'Enter your name here...',
+                              myFocusNode: _nameNode,
+                              nextFocusNode: _passNode,
                               controller: _nameController,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Name',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                hintText: 'Enter your name here...',
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                filled: true,
-                                errorText: value.currentViolations
-                                    .where((element) =>
-                                        element.propertyPath == "name")
-                                    .firstOrNull
-                                    ?.message,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                contentPadding:
-                                    const EdgeInsetsDirectional.fromSTEB(
-                                        16, 24, 0, 24),
-                              ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                              maxLines: null,
+                              errorText: value.currentViolations
+                                  .where((element) =>
+                                      element.propertyPath == "name")
+                                  .firstOrNull
+                                  ?.message,
                             ),
                           ),
                         ],
@@ -139,8 +126,11 @@ class _EditScreenState extends State<EditScreen> {
                         children: [
                           Expanded(
                             child: TextFormField(
+                              focusNode: _passNode,
                               controller: _passController,
                               obscureText: obsecure,
+                              onFieldSubmitted: (text) =>
+                                  onSubmit(context, value),
                               decoration: InputDecoration(
                                 labelText: 'Password',
                                 labelStyle:
@@ -221,20 +211,7 @@ class _EditScreenState extends State<EditScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FFButtonWidget(
-                      onPressed: () async {
-                        await value.updateCurrentUser(
-                          name: _nameController.text,
-                          pass: _passController.text,
-                          onUpdate: (msg) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text(msg),
-                              ),
-                            );
-                          },
-                        );
-                      },
+                      onPressed: () => onSubmit(context, value),
                       text: 'Update',
                       options: FFButtonOptions(
                         width: 130,

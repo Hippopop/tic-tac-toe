@@ -21,8 +21,7 @@ class _$ApiGamesGetCollection200ResponseHydraSearch
   factory _$ApiGamesGetCollection200ResponseHydraSearch(
           [void Function(ApiGamesGetCollection200ResponseHydraSearchBuilder)?
               updates]) =>
-      (new ApiGamesGetCollection200ResponseHydraSearchBuilder()
-            ..update(updates))
+      (ApiGamesGetCollection200ResponseHydraSearchBuilder()..update(updates))
           ._build();
 
   _$ApiGamesGetCollection200ResponseHydraSearch._(
@@ -40,7 +39,7 @@ class _$ApiGamesGetCollection200ResponseHydraSearch
 
   @override
   ApiGamesGetCollection200ResponseHydraSearchBuilder toBuilder() =>
-      new ApiGamesGetCollection200ResponseHydraSearchBuilder()..replace(this);
+      ApiGamesGetCollection200ResponseHydraSearchBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -103,7 +102,7 @@ class ApiGamesGetCollection200ResponseHydraSearchBuilder
   ListBuilder<ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner>?
       _hydraColonMapping;
   ListBuilder<ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner>
-      get hydraColonMapping => _$this._hydraColonMapping ??= new ListBuilder<
+      get hydraColonMapping => _$this._hydraColonMapping ??= ListBuilder<
           ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner>();
   set hydraColonMapping(
           ListBuilder<
@@ -147,7 +146,7 @@ class ApiGamesGetCollection200ResponseHydraSearchBuilder
     _$ApiGamesGetCollection200ResponseHydraSearch _$result;
     try {
       _$result = _$v ??
-          new _$ApiGamesGetCollection200ResponseHydraSearch._(
+          _$ApiGamesGetCollection200ResponseHydraSearch._(
               atType: atType,
               hydraColonTemplate: hydraColonTemplate,
               hydraColonVariableRepresentation:
@@ -159,7 +158,7 @@ class ApiGamesGetCollection200ResponseHydraSearchBuilder
         _$failedField = 'hydraColonMapping';
         _hydraColonMapping?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'ApiGamesGetCollection200ResponseHydraSearch',
             _$failedField,
             e.toString());

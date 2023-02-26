@@ -9,17 +9,18 @@ import 'package:built_value/serializer.dart';
 
 part 'user_jsonld_user_read.g.dart';
 
-/// 
+///
 ///
 /// Properties:
-/// * [atContext] 
-/// * [atId] 
-/// * [atType] 
-/// * [id] 
-/// * [email] 
-/// * [name] 
+/// * [atContext]
+/// * [atId]
+/// * [atType]
+/// * [id]
+/// * [email]
+/// * [name]
 @BuiltValue()
-abstract class UserJsonldUserRead implements Built<UserJsonldUserRead, UserJsonldUserReadBuilder> {
+abstract class UserJsonldUserRead
+    implements Built<UserJsonldUserRead, UserJsonldUserReadBuilder> {
   @BuiltValueField(wireName: r'@context')
   GameJsonldGameReadContext? get atContext;
 
@@ -40,16 +41,19 @@ abstract class UserJsonldUserRead implements Built<UserJsonldUserRead, UserJsonl
 
   UserJsonldUserRead._();
 
-  factory UserJsonldUserRead([void updates(UserJsonldUserReadBuilder b)]) = _$UserJsonldUserRead;
+  factory UserJsonldUserRead([void updates(UserJsonldUserReadBuilder b)]) =
+      _$UserJsonldUserRead;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserJsonldUserReadBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserJsonldUserRead> get serializer => _$UserJsonldUserReadSerializer();
+  static Serializer<UserJsonldUserRead> get serializer =>
+      _$UserJsonldUserReadSerializer();
 }
 
-class _$UserJsonldUserReadSerializer implements PrimitiveSerializer<UserJsonldUserRead> {
+class _$UserJsonldUserReadSerializer
+    implements PrimitiveSerializer<UserJsonldUserRead> {
   @override
   final Iterable<Type> types = const [UserJsonldUserRead, _$UserJsonldUserRead];
 
@@ -111,7 +115,9 @@ class _$UserJsonldUserReadSerializer implements PrimitiveSerializer<UserJsonldUs
     UserJsonldUserRead object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -196,4 +202,3 @@ class _$UserJsonldUserReadSerializer implements PrimitiveSerializer<UserJsonldUs
     return result.build();
   }
 }
-

@@ -16,7 +16,7 @@ class _$TurnJsonldTurnCreate extends TurnJsonldTurnCreate {
 
   factory _$TurnJsonldTurnCreate(
           [void Function(TurnJsonldTurnCreateBuilder)? updates]) =>
-      (new TurnJsonldTurnCreateBuilder()..update(updates))._build();
+      (TurnJsonldTurnCreateBuilder()..update(updates))._build();
 
   _$TurnJsonldTurnCreate._({this.x, this.y, this.game}) : super._();
 
@@ -27,7 +27,7 @@ class _$TurnJsonldTurnCreate extends TurnJsonldTurnCreate {
 
   @override
   TurnJsonldTurnCreateBuilder toBuilder() =>
-      new TurnJsonldTurnCreateBuilder()..replace(this);
+      TurnJsonldTurnCreateBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -104,8 +104,7 @@ class TurnJsonldTurnCreateBuilder
   TurnJsonldTurnCreate build() => _build();
 
   _$TurnJsonldTurnCreate _build() {
-    final _$result =
-        _$v ?? new _$TurnJsonldTurnCreate._(x: x, y: y, game: game);
+    final _$result = _$v ?? _$TurnJsonldTurnCreate._(x: x, y: y, game: game);
     replace(_$result);
     return _$result;
   }

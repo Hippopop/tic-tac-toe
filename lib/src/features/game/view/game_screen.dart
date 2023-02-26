@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -7,8 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
 import 'package:tic_tac_toe/src/features/game/controller/game_controller.dart';
 import 'package:tic_tac_toe/src/features/game/view/widgets/game_box.dart';
-import 'package:tic_tac_toe/src/features/home/view/widgets/bottom_bar.dart';
-import 'package:tic_tac_toe/src/features/home/view/widgets/top_bar.dart';
+import 'package:tic_tac_toe/src/features/global/widgets/bottom_bar.dart';
+import 'package:tic_tac_toe/src/features/global/widgets/top_bar.dart';
 import 'package:tic_tac_toe/src/services/data_source/request_handler.dart';
 import 'package:tic_tac_toe/src/services/theme/flutter_flow_theme.dart';
 
@@ -52,7 +51,7 @@ class _GameScreenState extends State<GameScreen> {
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                       child: Text(
-                        (/* context.read<GameController>().currentGame != null &&  */ context
+                        (context
                                     .read<GameController>()
                                     .currentGame
                                     ?.createTime !=
@@ -121,12 +120,12 @@ class _GameScreenState extends State<GameScreen> {
                     log("isPlayer ${value.isPlayer}");
                     log("isTurn ${value.isTurn}");
                     return AbsorbPointer(
-                    absorbing: !value.isPlayer,
-                    child: GameBox(
-                      turns: value.currentGame?.turns ?? [],
-                      refresh: (value.isPlayer && !value.isTurn),
-                    ),
-                  );
+                      absorbing: !value.isPlayer,
+                      child: GameBox(
+                        turns: value.currentGame?.turns ?? [],
+                        refresh: (value.isPlayer && !value.isTurn),
+                      ),
+                    );
                   },
                   // child: ,
                 ),

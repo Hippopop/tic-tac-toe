@@ -15,12 +15,15 @@ part 'api_games_get_collection200_response.g.dart';
 /// ApiGamesGetCollection200Response
 ///
 /// Properties:
-/// * [hydraColonMember] 
-/// * [hydraColonTotalItems] 
-/// * [hydraColonView] 
-/// * [hydraColonSearch] 
+/// * [hydraColonMember]
+/// * [hydraColonTotalItems]
+/// * [hydraColonView]
+/// * [hydraColonSearch]
 @BuiltValue()
-abstract class ApiGamesGetCollection200Response implements Built<ApiGamesGetCollection200Response, ApiGamesGetCollection200ResponseBuilder> {
+abstract class ApiGamesGetCollection200Response
+    implements
+        Built<ApiGamesGetCollection200Response,
+            ApiGamesGetCollection200ResponseBuilder> {
   @BuiltValueField(wireName: r'hydra:member')
   BuiltList<GameJsonldGameRead> get hydraColonMember;
 
@@ -35,18 +38,25 @@ abstract class ApiGamesGetCollection200Response implements Built<ApiGamesGetColl
 
   ApiGamesGetCollection200Response._();
 
-  factory ApiGamesGetCollection200Response([void updates(ApiGamesGetCollection200ResponseBuilder b)]) = _$ApiGamesGetCollection200Response;
+  factory ApiGamesGetCollection200Response(
+          [void updates(ApiGamesGetCollection200ResponseBuilder b)]) =
+      _$ApiGamesGetCollection200Response;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ApiGamesGetCollection200ResponseBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ApiGamesGetCollection200Response> get serializer => _$ApiGamesGetCollection200ResponseSerializer();
+  static Serializer<ApiGamesGetCollection200Response> get serializer =>
+      _$ApiGamesGetCollection200ResponseSerializer();
 }
 
-class _$ApiGamesGetCollection200ResponseSerializer implements PrimitiveSerializer<ApiGamesGetCollection200Response> {
+class _$ApiGamesGetCollection200ResponseSerializer
+    implements PrimitiveSerializer<ApiGamesGetCollection200Response> {
   @override
-  final Iterable<Type> types = const [ApiGamesGetCollection200Response, _$ApiGamesGetCollection200Response];
+  final Iterable<Type> types = const [
+    ApiGamesGetCollection200Response,
+    _$ApiGamesGetCollection200Response
+  ];
 
   @override
   final String wireName = r'ApiGamesGetCollection200Response';
@@ -72,14 +82,16 @@ class _$ApiGamesGetCollection200ResponseSerializer implements PrimitiveSerialize
       yield r'hydra:view';
       yield serializers.serialize(
         object.hydraColonView,
-        specifiedType: const FullType(ApiGamesGetCollection200ResponseHydraView),
+        specifiedType:
+            const FullType(ApiGamesGetCollection200ResponseHydraView),
       );
     }
     if (object.hydraColonSearch != null) {
       yield r'hydra:search';
       yield serializers.serialize(
         object.hydraColonSearch,
-        specifiedType: const FullType(ApiGamesGetCollection200ResponseHydraSearch),
+        specifiedType:
+            const FullType(ApiGamesGetCollection200ResponseHydraSearch),
       );
     }
   }
@@ -90,7 +102,9 @@ class _$ApiGamesGetCollection200ResponseSerializer implements PrimitiveSerialize
     ApiGamesGetCollection200Response object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -108,7 +122,8 @@ class _$ApiGamesGetCollection200ResponseSerializer implements PrimitiveSerialize
         case r'hydra:member':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(BuiltList, [FullType(GameJsonldGameRead)]),
+            specifiedType:
+                const FullType(BuiltList, [FullType(GameJsonldGameRead)]),
           ) as BuiltList<GameJsonldGameRead>;
           result.hydraColonMember.replace(valueDes);
           break;
@@ -122,14 +137,16 @@ class _$ApiGamesGetCollection200ResponseSerializer implements PrimitiveSerialize
         case r'hydra:view':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(ApiGamesGetCollection200ResponseHydraView),
+            specifiedType:
+                const FullType(ApiGamesGetCollection200ResponseHydraView),
           ) as ApiGamesGetCollection200ResponseHydraView;
           result.hydraColonView.replace(valueDes);
           break;
         case r'hydra:search':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(ApiGamesGetCollection200ResponseHydraSearch),
+            specifiedType:
+                const FullType(ApiGamesGetCollection200ResponseHydraSearch),
           ) as ApiGamesGetCollection200ResponseHydraSearch;
           result.hydraColonSearch.replace(valueDes);
           break;
@@ -161,4 +178,3 @@ class _$ApiGamesGetCollection200ResponseSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-

@@ -3,7 +3,8 @@ import 'package:openapi/openapi.dart';
 
 // tests for ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner
 void main() {
-  final instance = ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder();
+  final instance =
+      ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder();
   // TODO add properties to the builder and call build()
 
   group(ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner, () {
@@ -26,6 +27,5 @@ void main() {
     test('to test the property `required_`', () async {
       // TODO
     });
-
   });
 }

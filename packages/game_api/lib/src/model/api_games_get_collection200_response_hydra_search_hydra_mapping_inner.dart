@@ -11,12 +11,15 @@ part 'api_games_get_collection200_response_hydra_search_hydra_mapping_inner.g.da
 /// ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner
 ///
 /// Properties:
-/// * [atType] 
-/// * [variable] 
-/// * [property] 
-/// * [required_] 
+/// * [atType]
+/// * [variable]
+/// * [property]
+/// * [required_]
 @BuiltValue()
-abstract class ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner implements Built<ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner, ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder> {
+abstract class ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner
+    implements
+        Built<ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner,
+            ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder> {
   @BuiltValueField(wireName: r'@type')
   String? get atType;
 
@@ -31,21 +34,38 @@ abstract class ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner impl
 
   ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner._();
 
-  factory ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner([void updates(ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder b)]) = _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner;
+  factory ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner(
+          [void updates(
+              ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder
+                  b)]) =
+      _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder b) => b;
+  static void _defaults(
+          ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder
+              b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner> get serializer => _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerSerializer();
+  static Serializer<
+          ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner>
+      get serializer =>
+          _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerSerializer();
 }
 
-class _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerSerializer implements PrimitiveSerializer<ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner> {
+class _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerSerializer
+    implements
+        PrimitiveSerializer<
+            ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner> {
   @override
-  final Iterable<Type> types = const [ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner, _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner];
+  final Iterable<Type> types = const [
+    ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner,
+    _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner
+  ];
 
   @override
-  final String wireName = r'ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner';
+  final String wireName =
+      r'ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
@@ -88,7 +108,9 @@ class _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerSerializer i
     ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -96,7 +118,8 @@ class _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerSerializer i
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder result,
+    required ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder
+        result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -146,7 +169,8 @@ class _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerSerializer i
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder();
+    final result =
+        ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(
@@ -160,4 +184,3 @@ class _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerSerializer i
     return result.build();
   }
 }
-
