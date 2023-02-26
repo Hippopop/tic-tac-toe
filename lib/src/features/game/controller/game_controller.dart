@@ -37,6 +37,8 @@ class GameController extends ChangeNotifier {
     }
   }
 
+  
+
   refreshGameData() async {
     final res = await _repository.getGameData(gameId);
     final data = res.match<GameData?>(

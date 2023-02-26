@@ -31,7 +31,7 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   callApiForData() {
-    if (_controller.text.length > 3) {
+    if (_controller.text.length > 2) {
       context.read<UserController>().fetchUserList(_controller.text);
     }
   }

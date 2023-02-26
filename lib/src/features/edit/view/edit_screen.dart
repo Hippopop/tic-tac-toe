@@ -129,7 +129,7 @@ class _EditScreenState extends State<EditScreen> {
                               focusNode: _passNode,
                               controller: _passController,
                               obscureText: obsecure,
-                              onFieldSubmitted: (text) =>
+                              onFieldSubmitted: (text) async => await
                                   onSubmit(context, value),
                               decoration: InputDecoration(
                                 labelText: 'Password',
@@ -211,8 +211,8 @@ class _EditScreenState extends State<EditScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FFButtonWidget(
-                      onPressed: () => onSubmit(context, value),
-                      text: 'Update',
+                      onPressed: () async => await onSubmit(context, value),
+                      text: value.isLoading? 'Updating...' : 'Update',
                       options: FFButtonOptions(
                         width: 130,
                         height: 50,

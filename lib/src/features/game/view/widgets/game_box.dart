@@ -23,17 +23,18 @@ class GameBox extends StatefulWidget {
 }
 
 class _GameBoxState extends State<GameBox> {
-  late final Timer _refreshser;
+  Timer? _refreshser;
 
   @override
   void initState() {
     super.initState();
-    _refreshser = Timer.periodic(const Duration(seconds: 4), _refreshFunc);
+    if (widget.refresh) {
+      _refreshser = Timer.periodic(const Duration(seconds: 3), _refreshFunc);
+    }
   }
 
   _refreshFunc(Timer timer) {
     final controller = context.read<GameController>();
-    log(widget.refresh.toString());
     if (widget.refresh) {
       log("Calling refresh ticker!");
       controller.refreshGameData();
@@ -42,7 +43,7 @@ class _GameBoxState extends State<GameBox> {
 
   @override
   void dispose() {
-    _refreshser.cancel();
+    _refreshser?.cancel();
     super.dispose();
   }
 

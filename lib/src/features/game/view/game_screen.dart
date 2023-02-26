@@ -9,6 +9,7 @@ import 'package:tic_tac_toe/src/features/game/view/widgets/game_box.dart';
 import 'package:tic_tac_toe/src/features/global/widgets/bottom_bar.dart';
 import 'package:tic_tac_toe/src/features/global/widgets/top_bar.dart';
 import 'package:tic_tac_toe/src/services/data_source/request_handler.dart';
+import 'package:tic_tac_toe/src/services/data_source/user_provider/user_controller.dart';
 import 'package:tic_tac_toe/src/services/theme/flutter_flow_theme.dart';
 
 class GameScreen extends StatefulWidget {
@@ -67,47 +68,75 @@ class _GameScreenState extends State<GameScreen> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      'End Time:',
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                      child: Text(
-                        (context
-                                    .read<GameController>()
-                                    .currentGame
-                                    ?.finishTime !=
-                                null)
-                            ? format.format(context
-                                .read<GameController>()
-                                .currentGame!
-                                .finishTime!)
-                            : "",
-                        style: FlutterFlowTheme.of(context).bodyText1,
+              (context.watch<GameController>().currentGame?.finishTime == null)
+                  ? Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'Current Turn :',
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                8, 0, 0, 0),
+                            child: Text(
+                              "${context.watch<UserController>().getUserByPath(context.watch<GameController>().currentGame?.currentTurnPlayer ?? "")?.name.toUpperCase()}",
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'End Time:',
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                              8,
+                              0,
+                              0,
+                              0,
+                            ),
+                            child: Text(
+                              (context
+                                          .read<GameController>()
+                                          .currentGame
+                                          ?.finishTime !=
+                                      null)
+                                  ? format.format(context
+                                      .read<GameController>()
+                                      .currentGame!
+                                      .finishTime!)
+                                  : "",
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      'Game :',
+                      'Game Result:',
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                       child: Text(
-                        "${context.watch<GameController>().currentGame?.id}",
+                        "${context.watch<GameController>().currentGame?.result}",
                         style: FlutterFlowTheme.of(context).bodyText1,
                       ),
                     ),

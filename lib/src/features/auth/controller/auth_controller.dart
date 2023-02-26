@@ -25,6 +25,7 @@ class AuthController extends ChangeNotifier {
     required Function(String msg) onError,
   }) async {
     isLoading = true;
+    notifyListeners();
     final res = await _repository.requestLogin(requestData: request);
     AuthToken? token = res.match<AuthToken?>(
       (error) {

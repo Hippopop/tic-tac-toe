@@ -39,7 +39,8 @@ class UserController extends ChangeNotifier {
     }
   }
 
-  User? getUserByPath(String idPath) {
+  User? getUserByPath(String? idPath) {
+    if(idPath == null) return null;
     if (userList.any((element) => element.idPath == idPath)) {
       return userList.firstWhere((element) => element.idPath == idPath);
     } else {

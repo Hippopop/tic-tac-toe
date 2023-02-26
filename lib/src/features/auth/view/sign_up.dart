@@ -167,7 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               focusNode: _passNode,
                               controller: _passController,
                               obscureText: obsecure,
-                              onFieldSubmitted: (value) => onSubmit(context),
+                              onFieldSubmitted: (value) async => await onSubmit(context),
                               decoration: InputDecoration(
                                 labelText: 'Password',
                                 labelStyle:
@@ -248,7 +248,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FFButtonWidget(
-                      onPressed: () => onSubmit(context),
+                      onPressed: () async => await onSubmit(context),
                       text: 'Register',
                       options: FFButtonOptions(
                         width: 130,
