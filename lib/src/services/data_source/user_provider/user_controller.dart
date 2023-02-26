@@ -83,4 +83,10 @@ class UserController extends ChangeNotifier {
       },
     );
   }
+
+  @override
+  void dispose() {
+    //!NOTE: This is to persist this provider throughout app lifecycle.
+    super.dispose();
+  }
 }

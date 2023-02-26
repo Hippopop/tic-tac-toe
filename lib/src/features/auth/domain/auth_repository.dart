@@ -11,6 +11,7 @@ class AuthRepository {
   AuthRepository({required this.requestHandler});
   static const authenticateTokenPath = "/api/authentication_token";
   static const currentUserPath = "/api/users/me";
+  static const updateUserPath = "/api/users";
 
   Future<Either<RequestException?, AuthToken>> requestLogin(
       {required LoginRequest requestData}) async {
@@ -30,15 +31,18 @@ class AuthRepository {
     }).run();
   }
 
-/*   Future<Either<RequestException?, AuthToken>> requestLogin(
-      {required LoginRequest requestData}) async {
+  Future<Either<RequestException?, User>> updateUser({
+    required String name,
+    required String password,
+    required int id,
+  }) async {
     return TaskEither.tryCatch(() async {
-      final res = await requestHandler.post(
-        authenticateTokenPath,
-        requestData.toMap(),
-        requireToken: false,
+      final res = await requestHandler.put(
+        "$updateUserPath/$id",
+        {"name": name, "plainPassword": password},
       );
-      return AuthToken.fromMap(res);
+      log(res.toString());
+      return User.fromMap(res);
     }, (error, stackTrace) {
       if (error is RequestException) {
         return error;
@@ -46,7 +50,7 @@ class AuthRepository {
         log("#Unhandled Error", error: error, stackTrace: stackTrace);
       }
     }).run();
-  } */
+  }
 
   Future<Either<RequestException?, User>> getCurrentUser() async {
     return TaskEither.tryCatch(() async {
