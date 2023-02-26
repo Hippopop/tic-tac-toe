@@ -30,6 +30,24 @@ class AuthRepository {
     }).run();
   }
 
+/*   Future<Either<RequestException?, AuthToken>> requestLogin(
+      {required LoginRequest requestData}) async {
+    return TaskEither.tryCatch(() async {
+      final res = await requestHandler.post(
+        authenticateTokenPath,
+        requestData.toMap(),
+        requireToken: false,
+      );
+      return AuthToken.fromMap(res);
+    }, (error, stackTrace) {
+      if (error is RequestException) {
+        return error;
+      } else {
+        log("#Unhandled Error", error: error, stackTrace: stackTrace);
+      }
+    }).run();
+  } */
+
   Future<Either<RequestException?, User>> getCurrentUser() async {
     return TaskEither.tryCatch(() async {
       final res = await requestHandler.get(

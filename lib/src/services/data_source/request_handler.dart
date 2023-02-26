@@ -254,8 +254,7 @@ class InterceptDio extends Interceptor {
     log(err.requestOptions.path);
     if (err.type == DioErrorType.response &&
         err.response?.statusCode == 401 &&
-        err.requestOptions.path !=
-            "https://tictactoe.stage.mcmhq.io/api/authentication_token") {
+        err.requestOptions.headers.containsKey("Authorization")) {
       await handleError();
     } else {
       super.onError(err, handler);

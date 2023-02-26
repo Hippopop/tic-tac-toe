@@ -51,7 +51,9 @@ class BottomBar extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push("/edit");
+                      },
                       icon: const Icon(
                         Icons.settings_outlined,
                         color: Colors.black,
