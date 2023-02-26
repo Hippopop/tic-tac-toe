@@ -6,8 +6,8 @@ import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/user_model.dart';
 import 'package:tic_tac_toe/src/features/auth/view/widgets/button_widget.dart';
 import 'package:tic_tac_toe/src/features/create/controller/create_controller.dart';
-import 'package:tic_tac_toe/src/features/home/view/widgets/bottom_bar.dart';
-import 'package:tic_tac_toe/src/features/home/view/widgets/top_bar.dart';
+import 'package:tic_tac_toe/src/features/global/widgets/bottom_bar.dart';
+import 'package:tic_tac_toe/src/features/global/widgets/top_bar.dart';
 import 'package:tic_tac_toe/src/services/data_source/user_provider/user_controller.dart';
 import 'package:tic_tac_toe/src/services/theme/flutter_flow_theme.dart';
 

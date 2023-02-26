@@ -6,8 +6,8 @@ import 'package:tic_tac_toe/src/services/data_source/request_handler.dart';
 import 'package:tic_tac_toe/src/services/theme/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/bottom_bar.dart';
-import 'widgets/top_bar.dart';
+import '../../global/widgets/bottom_bar.dart';
+import '../../global/widgets/top_bar.dart';
 
 class HomepageScreen extends StatefulWidget {
   const HomepageScreen({super.key});

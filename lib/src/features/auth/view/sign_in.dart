@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/login_request_model.dart';
 import 'package:tic_tac_toe/src/features/auth/view/widgets/button_widget.dart';
+import 'package:tic_tac_toe/src/features/global/widgets/base_text_field.dart';
 import 'package:tic_tac_toe/src/services/theme/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,8 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _passController;
+  late final FocusNode _emailFocusNode;
+  late final FocusNode _passwordFocusNode;
   bool obsecure = true;
 
   @override
@@ -23,13 +26,37 @@ class _SigninScreenState extends State<SigninScreen> {
     super.initState();
     _emailController = TextEditingController();
     _passController = TextEditingController();
+    _emailFocusNode = FocusNode();
+    _passwordFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passController.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
     super.dispose();
+  }
+
+  onSubmit(BuildContext context) {
+    Provider.of<AuthController>(context, listen: false).userLogin(
+      request: LoginRequest(
+        email: _emailController.text,
+        password: _passController.text,
+      ),
+      onSuccess: () {
+        context.pushReplacement("/home");
+      },
+      onError: (msg) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(msg),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -84,56 +111,12 @@ class _SigninScreenState extends State<SigninScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: TextFormField(
+                            child: BaseTextField(
                               controller: _emailController,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Email Address',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                hintText: 'Enter your email here...',
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                filled: true,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                contentPadding:
-                                    const EdgeInsetsDirectional.fromSTEB(
-                                        16, 24, 0, 24),
-                              ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                              maxLines: null,
-                              // validator: _model.emailAddressControllerValidator
-                              //     .asValidator(context),
+                              myFocusNode: _emailFocusNode,
+                              nextFocusNode: _passwordFocusNode,
+                              labelText: 'Email Address',
+                              hintText: 'Enter your email here...',
                             ),
                           ),
                         ],
@@ -150,6 +133,8 @@ class _SigninScreenState extends State<SigninScreen> {
                             child: TextFormField(
                               controller: _passController,
                               obscureText: obsecure,
+                              focusNode: _passwordFocusNode,
+                              onFieldSubmitted: (value) => onSubmit(context),
                               decoration: InputDecoration(
                                 labelText: 'Password',
                                 labelStyle:
@@ -208,8 +193,6 @@ class _SigninScreenState extends State<SigninScreen> {
                                 ),
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1,
-                              // validator: _model.passwordControllerValidator
-                              //     .asValidator(context),
                             ),
                           ),
                         ],
@@ -225,26 +208,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FFButtonWidget(
-                      onPressed: () {
-                        Provider.of<AuthController>(context, listen: false)
-                            .userLogin(
-                          request: LoginRequest(
-                            email: _emailController.text,
-                            password: _passController.text,
-                          ),
-                          onSuccess: () {
-                            context.pushReplacement("/home");
-                          },
-                          onError: (msg) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text(msg),
-                              ),
-                            );
-                          },
-                        );
-                      },
+                      onPressed: () => onSubmit(context),
                       text: "Login",
                       options: FFButtonOptions(
                         width: 130,
@@ -308,3 +272,4 @@ class _SigninScreenState extends State<SigninScreen> {
     );
   }
 }
+
