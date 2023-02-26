@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/user_model.dart';
-import 'package:tic_tac_toe/src/features/auth/view/flutter_flow_widget.dart';
+import 'package:tic_tac_toe/src/features/auth/view/widgets/button_widget.dart';
 import 'package:tic_tac_toe/src/services/theme/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 

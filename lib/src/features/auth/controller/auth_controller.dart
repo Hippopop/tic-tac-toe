@@ -65,7 +65,10 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateCurrentUser({required String name, required String pass, required Function(String msg) onUpdate}) async {
+  updateCurrentUser(
+      {required String name,
+      required String pass,
+      required Function(String msg) onUpdate}) async {
     currentViolations.clear();
     final res = await _repository.updateUser(
         name: name, password: pass, id: currentUser!.id);
@@ -81,6 +84,48 @@ class AuthController extends ChangeNotifier {
       },
       (data) {
         onUpdate("User data updated!");
+        return data;
+      },
+    );
+    if (user != null) {
+      log("#User updated!");
+      currentUser = user;
+    }
+    notifyListeners();
+  }
+
+  ///!NOTE: This api, responds with
+  ///```dart
+  ///{
+  /// 	"code": 401,
+  /// 	"message": "JWT Token not found"
+  /// }
+  /// ```
+  ///But A new user user won't have a pre-existing token.
+  createNewUser({
+    required String email,
+    required String name,
+    required String pass,
+    required Function(String msg) onCreate,
+  }) async {
+    currentViolations.clear();
+    final res = await _repository.registerUser(
+      email: email,
+      name: name,
+      password: pass,
+    );
+    User? user = res.match<User?>(
+      (error) {
+        if (error?.res?.data?["@type"] == "ConstraintViolationList") {
+          final violation = ErrorWithViolationMode.fromMap(error!.res!.data);
+          currentViolations.addAll(violation.violations);
+          log("Violation ==> $currentViolations");
+          notifyListeners();
+        }
+        return null;
+      },
+      (data) {
+        onCreate("New User Created!");
         return data;
       },
     );

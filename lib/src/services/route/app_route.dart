@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tic_tac_toe/src/features/auth/view/sign_in.dart';
+import 'package:tic_tac_toe/src/features/auth/view/sign_up.dart';
 import 'package:tic_tac_toe/src/features/create/view/create_screen.dart';
 import 'package:tic_tac_toe/src/features/edit/view/edit_screen.dart';
 import 'package:tic_tac_toe/src/features/game/view/game_screen.dart';
@@ -14,11 +15,13 @@ class RouteProvider extends ChangeNotifier {
           routes: [
             GoRoute(
               path: "/",
-              builder: (context, state) => const SignInWidget(),
+              builder: (context, state) => const SigninScreen(),
             ),
             GoRoute(
               path: "/home",
-              builder: (context, state) => const HomepageScreen(),
+              builder: (context, state) => Builder(builder: (context) {
+                return const HomepageScreen();
+              }),
             ),
             GoRoute(
               path: "/game/:id",
@@ -38,13 +41,20 @@ class RouteProvider extends ChangeNotifier {
                 return const EditScreen();
               },
             ),
+            GoRoute(
+              path: "/reg",
+              builder: (context, state) {
+                return const SignUpScreen();
+              },
+            ),
           ],
           redirect: (context, state) async {
+            final bool loginPage =
+                (state.location == "/" || state.location == "/reg");
             if (requestHandler.hasToken) {
-              final bool loginPage = (state.location == "/");
-              return  loginPage? "/home" : state.location;
+              return loginPage ? "/home" : state.location;
             } else {
-              return "/";
+              return !loginPage ? "/" : state.location;
             }
           },
         );

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/user_model.dart';
-import 'package:tic_tac_toe/src/features/auth/view/flutter_flow_widget.dart';
+import 'package:tic_tac_toe/src/features/auth/view/widgets/button_widget.dart';
 import 'package:tic_tac_toe/src/features/create/controller/create_controller.dart';
 import 'package:tic_tac_toe/src/features/home/view/widgets/bottom_bar.dart';
 import 'package:tic_tac_toe/src/features/home/view/widgets/top_bar.dart';
