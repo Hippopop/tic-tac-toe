@@ -1,7 +1,6 @@
 import 'package:test/test.dart';
 import 'package:openapi/openapi.dart';
 
-
 /// tests for UserApi
 void main() {
   final instance = Openapi().getUserApi();
@@ -42,6 +41,5 @@ void main() {
     test('test apiUsersPost', () async {
       // TODO
     });
-
   });
 }

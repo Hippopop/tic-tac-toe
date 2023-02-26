@@ -24,7 +24,7 @@ class _$ApiGamesGetCollection200ResponseHydraView
   factory _$ApiGamesGetCollection200ResponseHydraView(
           [void Function(ApiGamesGetCollection200ResponseHydraViewBuilder)?
               updates]) =>
-      (new ApiGamesGetCollection200ResponseHydraViewBuilder()..update(updates))
+      (ApiGamesGetCollection200ResponseHydraViewBuilder()..update(updates))
           ._build();
 
   _$ApiGamesGetCollection200ResponseHydraView._(
@@ -44,7 +44,7 @@ class _$ApiGamesGetCollection200ResponseHydraView
 
   @override
   ApiGamesGetCollection200ResponseHydraViewBuilder toBuilder() =>
-      new ApiGamesGetCollection200ResponseHydraViewBuilder()..replace(this);
+      ApiGamesGetCollection200ResponseHydraViewBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -155,7 +155,7 @@ class ApiGamesGetCollection200ResponseHydraViewBuilder
 
   _$ApiGamesGetCollection200ResponseHydraView _build() {
     final _$result = _$v ??
-        new _$ApiGamesGetCollection200ResponseHydraView._(
+        _$ApiGamesGetCollection200ResponseHydraView._(
             atId: atId,
             atType: atType,
             hydraColonFirst: hydraColonFirst,

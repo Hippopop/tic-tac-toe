@@ -11,9 +11,10 @@ part 'refresh_token.g.dart';
 /// RefreshToken
 ///
 /// Properties:
-/// * [refreshToken] 
+/// * [refreshToken]
 @BuiltValue()
-abstract class RefreshToken implements Built<RefreshToken, RefreshTokenBuilder> {
+abstract class RefreshToken
+    implements Built<RefreshToken, RefreshTokenBuilder> {
   @BuiltValueField(wireName: r'refresh_token')
   String? get refreshToken;
 
@@ -55,7 +56,9 @@ class _$RefreshTokenSerializer implements PrimitiveSerializer<RefreshToken> {
     RefreshToken object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -105,4 +108,3 @@ class _$RefreshTokenSerializer implements PrimitiveSerializer<RefreshToken> {
     return result.build();
   }
 }
-

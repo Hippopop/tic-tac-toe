@@ -99,15 +99,15 @@ class _GameBoxState extends State<GameBox> {
                   BaseBox(
                       myOffset: const Offset(1, 1),
                       turn: widget.turns
-                          .where((element) =>
-                              (element.x == 1) && (element.y == 1))
+                          .where(
+                              (element) => (element.x == 1) && (element.y == 1))
                           .firstOrNull
                           ?.isPlayer1),
                   BaseBox(
                       myOffset: const Offset(2, 1),
                       turn: widget.turns
-                          .where((element) =>
-                              (element.x == 2) && (element.y == 1))
+                          .where(
+                              (element) => (element.x == 2) && (element.y == 1))
                           .firstOrNull
                           ?.isPlayer1),
                 ],
@@ -123,8 +123,8 @@ class _GameBoxState extends State<GameBox> {
                   ZeroZeroBox(
                       myOffset: const Offset(0, 0),
                       turn: widget.turns
-                          .where((element) =>
-                              (element.x == 0) && (element.y == 0))
+                          .where(
+                              (element) => (element.x == 0) && (element.y == 0))
                           .firstOrNull
                           ?.isPlayer1),
                   BaseBox(
@@ -138,8 +138,8 @@ class _GameBoxState extends State<GameBox> {
                   TwoZeroBox(
                       myOffset: const Offset(2, 0),
                       turn: widget.turns
-                          .where((element) =>
-                              (element.x == 2) && (element.y == 0))
+                          .where(
+                              (element) => (element.x == 2) && (element.y == 0))
                           .firstOrNull
                           ?.isPlayer1),
                 ],
@@ -360,7 +360,7 @@ class BaseBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
-        onTap: () =>  context.read<GameController>().move(myOffset, (msg) {
+        onTap: () => context.read<GameController>().move(myOffset, (msg) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: Colors.red,
@@ -417,13 +417,13 @@ class ZeroZeroBox extends StatelessWidget {
     return Expanded(
       child: InkWell(
         onTap: () => context.read<GameController>().move(myOffset, (msg) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.red,
-                  content: Text(msg),
-                ),
-              );
-            }),
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(msg),
+            ),
+          );
+        }),
         child: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 1, 0),
           child: Container(

@@ -8,7 +8,7 @@ part of 'game_jsonld_game_read_context_one_of.dart';
 
 const GameJsonldGameReadContextOneOfHydraEnum
     _$gameJsonldGameReadContextOneOfHydraEnum_httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash =
-    const GameJsonldGameReadContextOneOfHydraEnum._(
+    GameJsonldGameReadContextOneOfHydraEnum._(
         'httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash');
 
 GameJsonldGameReadContextOneOfHydraEnum
@@ -17,28 +17,28 @@ GameJsonldGameReadContextOneOfHydraEnum
     case 'httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash':
       return _$gameJsonldGameReadContextOneOfHydraEnum_httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<GameJsonldGameReadContextOneOfHydraEnum>
     _$gameJsonldGameReadContextOneOfHydraEnumValues =
-    new BuiltSet<GameJsonldGameReadContextOneOfHydraEnum>(const <
+    BuiltSet<GameJsonldGameReadContextOneOfHydraEnum>(const <
         GameJsonldGameReadContextOneOfHydraEnum>[
   _$gameJsonldGameReadContextOneOfHydraEnum_httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash,
 ]);
 
 Serializer<GameJsonldGameReadContextOneOfHydraEnum>
     _$gameJsonldGameReadContextOneOfHydraEnumSerializer =
-    new _$GameJsonldGameReadContextOneOfHydraEnumSerializer();
+    _$GameJsonldGameReadContextOneOfHydraEnumSerializer();
 
 class _$GameJsonldGameReadContextOneOfHydraEnumSerializer
     implements PrimitiveSerializer<GameJsonldGameReadContextOneOfHydraEnum> {
-  static const Map<String, Object> _toWire = const <String, Object>{
+  static const Map<String, Object> _toWire = <String, Object>{
     'httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash':
         'http://www.w3.org/ns/hydra/core#',
   };
-  static const Map<Object, String> _fromWire = const <Object, String>{
+  static const Map<Object, String> _fromWire = <Object, String>{
     'http://www.w3.org/ns/hydra/core#':
         'httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash',
   };
@@ -72,7 +72,7 @@ class _$GameJsonldGameReadContextOneOf extends GameJsonldGameReadContextOneOf {
 
   factory _$GameJsonldGameReadContextOneOf(
           [void Function(GameJsonldGameReadContextOneOfBuilder)? updates]) =>
-      (new GameJsonldGameReadContextOneOfBuilder()..update(updates))._build();
+      (GameJsonldGameReadContextOneOfBuilder()..update(updates))._build();
 
   _$GameJsonldGameReadContextOneOf._(
       {required this.atVocab, required this.hydra})
@@ -90,7 +90,7 @@ class _$GameJsonldGameReadContextOneOf extends GameJsonldGameReadContextOneOf {
 
   @override
   GameJsonldGameReadContextOneOfBuilder toBuilder() =>
-      new GameJsonldGameReadContextOneOfBuilder()..replace(this);
+      GameJsonldGameReadContextOneOfBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -163,7 +163,7 @@ class GameJsonldGameReadContextOneOfBuilder
 
   _$GameJsonldGameReadContextOneOf _build() {
     final _$result = _$v ??
-        new _$GameJsonldGameReadContextOneOf._(
+        _$GameJsonldGameReadContextOneOf._(
             atVocab: BuiltValueNullFieldError.checkNotNull(
                 atVocab, r'GameJsonldGameReadContextOneOf', 'atVocab'),
             hydra: BuiltValueNullFieldError.checkNotNull(

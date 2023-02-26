@@ -11,8 +11,8 @@ part 'token.g.dart';
 /// Token
 ///
 /// Properties:
-/// * [token] 
-/// * [refreshToken] 
+/// * [token]
+/// * [refreshToken]
 @BuiltValue()
 abstract class Token implements Built<Token, TokenBuilder> {
   @BuiltValueField(wireName: r'token')
@@ -66,7 +66,9 @@ class _$TokenSerializer implements PrimitiveSerializer<Token> {
     Token object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -123,4 +125,3 @@ class _$TokenSerializer implements PrimitiveSerializer<Token> {
     return result.build();
   }
 }
-

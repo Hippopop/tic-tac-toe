@@ -11,8 +11,8 @@ part 'credentials.g.dart';
 /// Credentials
 ///
 /// Properties:
-/// * [email] 
-/// * [password] 
+/// * [email]
+/// * [password]
 @BuiltValue()
 abstract class Credentials implements Built<Credentials, CredentialsBuilder> {
   @BuiltValueField(wireName: r'email')
@@ -66,7 +66,9 @@ class _$CredentialsSerializer implements PrimitiveSerializer<Credentials> {
     Credentials object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -123,4 +125,3 @@ class _$CredentialsSerializer implements PrimitiveSerializer<Credentials> {
     return result.build();
   }
 }
-

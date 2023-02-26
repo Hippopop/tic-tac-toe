@@ -16,7 +16,7 @@ class _$UserJsonldUserCreate extends UserJsonldUserCreate {
 
   factory _$UserJsonldUserCreate(
           [void Function(UserJsonldUserCreateBuilder)? updates]) =>
-      (new UserJsonldUserCreateBuilder()..update(updates))._build();
+      (UserJsonldUserCreateBuilder()..update(updates))._build();
 
   _$UserJsonldUserCreate._({this.email, this.plainPassword, this.name})
       : super._();
@@ -28,7 +28,7 @@ class _$UserJsonldUserCreate extends UserJsonldUserCreate {
 
   @override
   UserJsonldUserCreateBuilder toBuilder() =>
-      new UserJsonldUserCreateBuilder()..replace(this);
+      UserJsonldUserCreateBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -107,7 +107,7 @@ class UserJsonldUserCreateBuilder
 
   _$UserJsonldUserCreate _build() {
     final _$result = _$v ??
-        new _$UserJsonldUserCreate._(
+        _$UserJsonldUserCreate._(
             email: email, plainPassword: plainPassword, name: name);
     replace(_$result);
     return _$result;

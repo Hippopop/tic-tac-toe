@@ -6,7 +6,7 @@ part of 'serializers.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializers _$serializers = (new Serializers().toBuilder()
+Serializers _$serializers = (Serializers().toBuilder()
       ..add(ApiGamesGetCollection200Response.serializer)
       ..add(ApiGamesGetCollection200ResponseHydraSearch.serializer)
       ..add(ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner
@@ -28,21 +28,21 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(UserJsonldUserRead.serializer)
       ..add(UserJsonldUserUpdate.serializer)
       ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType(
+          const FullType(BuiltList, [
+            FullType(
                 ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner)
           ]),
-          () => new ListBuilder<
+          () => ListBuilder<
               ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(GameJsonldGameRead)]),
-          () => new ListBuilder<GameJsonldGameRead>())
+          const FullType(BuiltList, [FullType(GameJsonldGameRead)]),
+          () => ListBuilder<GameJsonldGameRead>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(TurnJsonldGameRead)]),
-          () => new ListBuilder<TurnJsonldGameRead>())
+          const FullType(BuiltList, [FullType(TurnJsonldGameRead)]),
+          () => ListBuilder<TurnJsonldGameRead>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(UserJsonldUserRead)]),
-          () => new ListBuilder<UserJsonldUserRead>()))
+          const FullType(BuiltList, [FullType(UserJsonldUserRead)]),
+          () => ListBuilder<UserJsonldUserRead>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

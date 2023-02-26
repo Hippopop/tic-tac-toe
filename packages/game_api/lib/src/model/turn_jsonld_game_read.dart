@@ -9,20 +9,21 @@ import 'package:built_value/serializer.dart';
 
 part 'turn_jsonld_game_read.g.dart';
 
-/// 
+///
 ///
 /// Properties:
-/// * [atContext] 
-/// * [atId] 
-/// * [atType] 
-/// * [player] 
-/// * [x] 
-/// * [y] 
-/// * [isPlayer1] 
-/// * [createdAt] 
-/// * [highlight] 
+/// * [atContext]
+/// * [atId]
+/// * [atType]
+/// * [player]
+/// * [x]
+/// * [y]
+/// * [isPlayer1]
+/// * [createdAt]
+/// * [highlight]
 @BuiltValue()
-abstract class TurnJsonldGameRead implements Built<TurnJsonldGameRead, TurnJsonldGameReadBuilder> {
+abstract class TurnJsonldGameRead
+    implements Built<TurnJsonldGameRead, TurnJsonldGameReadBuilder> {
   @BuiltValueField(wireName: r'@context')
   GameJsonldGameReadContext? get atContext;
 
@@ -52,16 +53,19 @@ abstract class TurnJsonldGameRead implements Built<TurnJsonldGameRead, TurnJsonl
 
   TurnJsonldGameRead._();
 
-  factory TurnJsonldGameRead([void updates(TurnJsonldGameReadBuilder b)]) = _$TurnJsonldGameRead;
+  factory TurnJsonldGameRead([void updates(TurnJsonldGameReadBuilder b)]) =
+      _$TurnJsonldGameRead;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TurnJsonldGameReadBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TurnJsonldGameRead> get serializer => _$TurnJsonldGameReadSerializer();
+  static Serializer<TurnJsonldGameRead> get serializer =>
+      _$TurnJsonldGameReadSerializer();
 }
 
-class _$TurnJsonldGameReadSerializer implements PrimitiveSerializer<TurnJsonldGameRead> {
+class _$TurnJsonldGameReadSerializer
+    implements PrimitiveSerializer<TurnJsonldGameRead> {
   @override
   final Iterable<Type> types = const [TurnJsonldGameRead, _$TurnJsonldGameRead];
 
@@ -102,15 +106,19 @@ class _$TurnJsonldGameReadSerializer implements PrimitiveSerializer<TurnJsonldGa
       );
     }
     yield r'x';
-    yield object.x == null ? null : serializers.serialize(
-      object.x,
-      specifiedType: const FullType.nullable(int),
-    );
+    yield object.x == null
+        ? null
+        : serializers.serialize(
+            object.x,
+            specifiedType: const FullType.nullable(int),
+          );
     yield r'y';
-    yield object.y == null ? null : serializers.serialize(
-      object.y,
-      specifiedType: const FullType.nullable(int),
-    );
+    yield object.y == null
+        ? null
+        : serializers.serialize(
+            object.y,
+            specifiedType: const FullType.nullable(int),
+          );
     if (object.isPlayer1 != null) {
       yield r'isPlayer1';
       yield serializers.serialize(
@@ -140,7 +148,9 @@ class _$TurnJsonldGameReadSerializer implements PrimitiveSerializer<TurnJsonldGa
     TurnJsonldGameRead object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -252,4 +262,3 @@ class _$TurnJsonldGameReadSerializer implements PrimitiveSerializer<TurnJsonldGa
     return result.build();
   }
 }
-

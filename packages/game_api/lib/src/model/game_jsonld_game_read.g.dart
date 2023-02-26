@@ -7,13 +7,13 @@ part of 'game_jsonld_game_read.dart';
 // **************************************************************************
 
 const GameJsonldGameReadResultEnum _$gameJsonldGameReadResultEnum_unfinished =
-    const GameJsonldGameReadResultEnum._('unfinished');
+    GameJsonldGameReadResultEnum._('unfinished');
 const GameJsonldGameReadResultEnum _$gameJsonldGameReadResultEnum_player1 =
-    const GameJsonldGameReadResultEnum._('player1');
+    GameJsonldGameReadResultEnum._('player1');
 const GameJsonldGameReadResultEnum _$gameJsonldGameReadResultEnum_player2 =
-    const GameJsonldGameReadResultEnum._('player2');
+    GameJsonldGameReadResultEnum._('player2');
 const GameJsonldGameReadResultEnum _$gameJsonldGameReadResultEnum_draw =
-    const GameJsonldGameReadResultEnum._('draw');
+    GameJsonldGameReadResultEnum._('draw');
 
 GameJsonldGameReadResultEnum _$gameJsonldGameReadResultEnumValueOf(
     String name) {
@@ -27,13 +27,13 @@ GameJsonldGameReadResultEnum _$gameJsonldGameReadResultEnumValueOf(
     case 'draw':
       return _$gameJsonldGameReadResultEnum_draw;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<GameJsonldGameReadResultEnum>
-    _$gameJsonldGameReadResultEnumValues = new BuiltSet<
-        GameJsonldGameReadResultEnum>(const <GameJsonldGameReadResultEnum>[
+    _$gameJsonldGameReadResultEnumValues =
+    BuiltSet<GameJsonldGameReadResultEnum>(const <GameJsonldGameReadResultEnum>[
   _$gameJsonldGameReadResultEnum_unfinished,
   _$gameJsonldGameReadResultEnum_player1,
   _$gameJsonldGameReadResultEnum_player2,
@@ -42,17 +42,17 @@ final BuiltSet<GameJsonldGameReadResultEnum>
 
 Serializer<GameJsonldGameReadResultEnum>
     _$gameJsonldGameReadResultEnumSerializer =
-    new _$GameJsonldGameReadResultEnumSerializer();
+    _$GameJsonldGameReadResultEnumSerializer();
 
 class _$GameJsonldGameReadResultEnumSerializer
     implements PrimitiveSerializer<GameJsonldGameReadResultEnum> {
-  static const Map<String, Object> _toWire = const <String, Object>{
+  static const Map<String, Object> _toWire = <String, Object>{
     'unfinished': 'Unfinished',
     'player1': 'Player 1',
     'player2': 'Player 2',
     'draw': 'Draw',
   };
-  static const Map<Object, String> _fromWire = const <Object, String>{
+  static const Map<Object, String> _fromWire = <Object, String>{
     'Unfinished': 'unfinished',
     'Player 1': 'player1',
     'Player 2': 'player2',
@@ -107,7 +107,7 @@ class _$GameJsonldGameRead extends GameJsonldGameRead {
 
   factory _$GameJsonldGameRead(
           [void Function(GameJsonldGameReadBuilder)? updates]) =>
-      (new GameJsonldGameReadBuilder()..update(updates))._build();
+      (GameJsonldGameReadBuilder()..update(updates))._build();
 
   _$GameJsonldGameRead._(
       {this.atContext,
@@ -132,7 +132,7 @@ class _$GameJsonldGameRead extends GameJsonldGameRead {
 
   @override
   GameJsonldGameReadBuilder toBuilder() =>
-      new GameJsonldGameReadBuilder()..replace(this);
+      GameJsonldGameReadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -199,7 +199,7 @@ class GameJsonldGameReadBuilder
 
   GameJsonldGameReadContextBuilder? _atContext;
   GameJsonldGameReadContextBuilder get atContext =>
-      _$this._atContext ??= new GameJsonldGameReadContextBuilder();
+      _$this._atContext ??= GameJsonldGameReadContextBuilder();
   set atContext(GameJsonldGameReadContextBuilder? atContext) =>
       _$this._atContext = atContext;
 
@@ -245,7 +245,7 @@ class GameJsonldGameReadBuilder
 
   ListBuilder<TurnJsonldGameRead>? _turns;
   ListBuilder<TurnJsonldGameRead> get turns =>
-      _$this._turns ??= new ListBuilder<TurnJsonldGameRead>();
+      _$this._turns ??= ListBuilder<TurnJsonldGameRead>();
   set turns(ListBuilder<TurnJsonldGameRead>? turns) => _$this._turns = turns;
 
   String? _currentTurnPlayer;
@@ -296,7 +296,7 @@ class GameJsonldGameReadBuilder
     _$GameJsonldGameRead _$result;
     try {
       _$result = _$v ??
-          new _$GameJsonldGameRead._(
+          _$GameJsonldGameRead._(
               atContext: _atContext?.build(),
               atId: atId,
               atType: atType,
@@ -319,7 +319,7 @@ class GameJsonldGameReadBuilder
         _$failedField = 'turns';
         _turns?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'GameJsonldGameRead', _$failedField, e.toString());
       }
       rethrow;

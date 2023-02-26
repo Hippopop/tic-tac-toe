@@ -13,12 +13,15 @@ part 'api_games_get_collection200_response_hydra_search.g.dart';
 /// ApiGamesGetCollection200ResponseHydraSearch
 ///
 /// Properties:
-/// * [atType] 
-/// * [hydraColonTemplate] 
-/// * [hydraColonVariableRepresentation] 
-/// * [hydraColonMapping] 
+/// * [atType]
+/// * [hydraColonTemplate]
+/// * [hydraColonVariableRepresentation]
+/// * [hydraColonMapping]
 @BuiltValue()
-abstract class ApiGamesGetCollection200ResponseHydraSearch implements Built<ApiGamesGetCollection200ResponseHydraSearch, ApiGamesGetCollection200ResponseHydraSearchBuilder> {
+abstract class ApiGamesGetCollection200ResponseHydraSearch
+    implements
+        Built<ApiGamesGetCollection200ResponseHydraSearch,
+            ApiGamesGetCollection200ResponseHydraSearchBuilder> {
   @BuiltValueField(wireName: r'@type')
   String? get atType;
 
@@ -29,22 +32,34 @@ abstract class ApiGamesGetCollection200ResponseHydraSearch implements Built<ApiG
   String? get hydraColonVariableRepresentation;
 
   @BuiltValueField(wireName: r'hydra:mapping')
-  BuiltList<ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner>? get hydraColonMapping;
+  BuiltList<ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner>?
+      get hydraColonMapping;
 
   ApiGamesGetCollection200ResponseHydraSearch._();
 
-  factory ApiGamesGetCollection200ResponseHydraSearch([void updates(ApiGamesGetCollection200ResponseHydraSearchBuilder b)]) = _$ApiGamesGetCollection200ResponseHydraSearch;
+  factory ApiGamesGetCollection200ResponseHydraSearch(
+          [void updates(
+              ApiGamesGetCollection200ResponseHydraSearchBuilder b)]) =
+      _$ApiGamesGetCollection200ResponseHydraSearch;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ApiGamesGetCollection200ResponseHydraSearchBuilder b) => b;
+  static void _defaults(ApiGamesGetCollection200ResponseHydraSearchBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ApiGamesGetCollection200ResponseHydraSearch> get serializer => _$ApiGamesGetCollection200ResponseHydraSearchSerializer();
+  static Serializer<ApiGamesGetCollection200ResponseHydraSearch>
+      get serializer =>
+          _$ApiGamesGetCollection200ResponseHydraSearchSerializer();
 }
 
-class _$ApiGamesGetCollection200ResponseHydraSearchSerializer implements PrimitiveSerializer<ApiGamesGetCollection200ResponseHydraSearch> {
+class _$ApiGamesGetCollection200ResponseHydraSearchSerializer
+    implements
+        PrimitiveSerializer<ApiGamesGetCollection200ResponseHydraSearch> {
   @override
-  final Iterable<Type> types = const [ApiGamesGetCollection200ResponseHydraSearch, _$ApiGamesGetCollection200ResponseHydraSearch];
+  final Iterable<Type> types = const [
+    ApiGamesGetCollection200ResponseHydraSearch,
+    _$ApiGamesGetCollection200ResponseHydraSearch
+  ];
 
   @override
   final String wireName = r'ApiGamesGetCollection200ResponseHydraSearch';
@@ -79,7 +94,9 @@ class _$ApiGamesGetCollection200ResponseHydraSearchSerializer implements Primiti
       yield r'hydra:mapping';
       yield serializers.serialize(
         object.hydraColonMapping,
-        specifiedType: const FullType(BuiltList, [FullType(ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner)
+        ]),
       );
     }
   }
@@ -90,7 +107,9 @@ class _$ApiGamesGetCollection200ResponseHydraSearchSerializer implements Primiti
     ApiGamesGetCollection200ResponseHydraSearch object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -129,8 +148,12 @@ class _$ApiGamesGetCollection200ResponseHydraSearchSerializer implements Primiti
         case r'hydra:mapping':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(BuiltList, [FullType(ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner)]),
-          ) as BuiltList<ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner>;
+            specifiedType: const FullType(BuiltList, [
+              FullType(
+                  ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner)
+            ]),
+          ) as BuiltList<
+              ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner>;
           result.hydraColonMapping.replace(valueDes);
           break;
         default:
@@ -161,4 +184,3 @@ class _$ApiGamesGetCollection200ResponseHydraSearchSerializer implements Primiti
     return result.build();
   }
 }
-

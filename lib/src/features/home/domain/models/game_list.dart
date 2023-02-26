@@ -56,6 +56,7 @@ class GameList {
   }
 }
 
+// ignore: must_be_immutable
 class GameData extends Equatable {
   String? idPath;
   String? type;
@@ -72,8 +73,10 @@ class GameData extends Equatable {
 
   final _format = DateFormat("yyyy-MM-ddTHH:mm:ss+");
 
-  DateTime? get createTime => (createdAt == null)? null : _format.parse(createdAt ?? "");
-  DateTime? get finishTime => (finishedAt == null)? null :_format.parse(finishedAt ?? "");
+  DateTime? get createTime =>
+      (createdAt == null) ? null : _format.parse(createdAt ?? "");
+  DateTime? get finishTime =>
+      (finishedAt == null) ? null : _format.parse(finishedAt ?? "");
 
   String? get winnerPath {
     if (result == "Player 2") return player2;

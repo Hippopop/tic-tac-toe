@@ -11,14 +11,17 @@ part 'api_games_get_collection200_response_hydra_view.g.dart';
 /// ApiGamesGetCollection200ResponseHydraView
 ///
 /// Properties:
-/// * [atId] 
-/// * [atType] 
-/// * [hydraColonFirst] 
-/// * [hydraColonLast] 
-/// * [hydraColonPrevious] 
-/// * [hydraColonNext] 
+/// * [atId]
+/// * [atType]
+/// * [hydraColonFirst]
+/// * [hydraColonLast]
+/// * [hydraColonPrevious]
+/// * [hydraColonNext]
 @BuiltValue()
-abstract class ApiGamesGetCollection200ResponseHydraView implements Built<ApiGamesGetCollection200ResponseHydraView, ApiGamesGetCollection200ResponseHydraViewBuilder> {
+abstract class ApiGamesGetCollection200ResponseHydraView
+    implements
+        Built<ApiGamesGetCollection200ResponseHydraView,
+            ApiGamesGetCollection200ResponseHydraViewBuilder> {
   @BuiltValueField(wireName: r'@id')
   String? get atId;
 
@@ -39,18 +42,26 @@ abstract class ApiGamesGetCollection200ResponseHydraView implements Built<ApiGam
 
   ApiGamesGetCollection200ResponseHydraView._();
 
-  factory ApiGamesGetCollection200ResponseHydraView([void updates(ApiGamesGetCollection200ResponseHydraViewBuilder b)]) = _$ApiGamesGetCollection200ResponseHydraView;
+  factory ApiGamesGetCollection200ResponseHydraView(
+          [void updates(ApiGamesGetCollection200ResponseHydraViewBuilder b)]) =
+      _$ApiGamesGetCollection200ResponseHydraView;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ApiGamesGetCollection200ResponseHydraViewBuilder b) => b;
+  static void _defaults(ApiGamesGetCollection200ResponseHydraViewBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ApiGamesGetCollection200ResponseHydraView> get serializer => _$ApiGamesGetCollection200ResponseHydraViewSerializer();
+  static Serializer<ApiGamesGetCollection200ResponseHydraView> get serializer =>
+      _$ApiGamesGetCollection200ResponseHydraViewSerializer();
 }
 
-class _$ApiGamesGetCollection200ResponseHydraViewSerializer implements PrimitiveSerializer<ApiGamesGetCollection200ResponseHydraView> {
+class _$ApiGamesGetCollection200ResponseHydraViewSerializer
+    implements PrimitiveSerializer<ApiGamesGetCollection200ResponseHydraView> {
   @override
-  final Iterable<Type> types = const [ApiGamesGetCollection200ResponseHydraView, _$ApiGamesGetCollection200ResponseHydraView];
+  final Iterable<Type> types = const [
+    ApiGamesGetCollection200ResponseHydraView,
+    _$ApiGamesGetCollection200ResponseHydraView
+  ];
 
   @override
   final String wireName = r'ApiGamesGetCollection200ResponseHydraView';
@@ -110,7 +121,9 @@ class _$ApiGamesGetCollection200ResponseHydraViewSerializer implements Primitive
     ApiGamesGetCollection200ResponseHydraView object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -195,4 +208,3 @@ class _$ApiGamesGetCollection200ResponseHydraViewSerializer implements Primitive
     return result.build();
   }
 }
-

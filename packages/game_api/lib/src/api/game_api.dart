@@ -14,7 +14,6 @@ import 'package:openapi/src/model/game_jsonld_game_create.dart';
 import 'package:openapi/src/model/game_jsonld_game_read.dart';
 
 class GameApi {
-
   final Dio _dio;
 
   final Serializers _serializers;
@@ -26,19 +25,19 @@ class GameApi {
   ///
   /// Parameters:
   /// * [page] - The collection page number
-  /// * [player1] - 
-  /// * [player1LeftSquareBracketRightSquareBracket] - 
-  /// * [player2] - 
-  /// * [player2LeftSquareBracketRightSquareBracket] - 
-  /// * [result] - 
-  /// * [resultLeftSquareBracketRightSquareBracket] - 
-  /// * [open] - 
-  /// * [openLeftSquareBracketRightSquareBracket] - 
-  /// * [code] - 
-  /// * [codeLeftSquareBracketRightSquareBracket] - 
-  /// * [orderLeftSquareBracketCreatedAtRightSquareBracket] - 
-  /// * [orderLeftSquareBracketFinishedAtRightSquareBracket] - 
-  /// * [orderLeftSquareBracketResultRightSquareBracket] - 
+  /// * [player1] -
+  /// * [player1LeftSquareBracketRightSquareBracket] -
+  /// * [player2] -
+  /// * [player2LeftSquareBracketRightSquareBracket] -
+  /// * [result] -
+  /// * [resultLeftSquareBracketRightSquareBracket] -
+  /// * [open] -
+  /// * [openLeftSquareBracketRightSquareBracket] -
+  /// * [code] -
+  /// * [codeLeftSquareBracketRightSquareBracket] -
+  /// * [orderLeftSquareBracketCreatedAtRightSquareBracket] -
+  /// * [orderLeftSquareBracketFinishedAtRightSquareBracket] -
+  /// * [orderLeftSquareBracketResultRightSquareBracket] -
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -48,7 +47,7 @@ class GameApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ApiGamesGetCollection200Response] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<ApiGamesGetCollection200Response>> apiGamesGetCollection({ 
+  Future<Response<ApiGamesGetCollection200Response>> apiGamesGetCollection({
     int? page = 1,
     String? player1,
     BuiltList<String>? player1LeftSquareBracketRightSquareBracket,
@@ -90,20 +89,72 @@ class GameApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (page != null) r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (player1 != null) r'player1': encodeQueryParameter(_serializers, player1, const FullType(String)),
-      if (player1LeftSquareBracketRightSquareBracket != null) r'player1[]': encodeCollectionQueryParameter<String>(_serializers, player1LeftSquareBracketRightSquareBracket, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (player2 != null) r'player2': encodeQueryParameter(_serializers, player2, const FullType(String)),
-      if (player2LeftSquareBracketRightSquareBracket != null) r'player2[]': encodeCollectionQueryParameter<String>(_serializers, player2LeftSquareBracketRightSquareBracket, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (result != null) r'result': encodeQueryParameter(_serializers, result, const FullType(String)),
-      if (resultLeftSquareBracketRightSquareBracket != null) r'result[]': encodeCollectionQueryParameter<String>(_serializers, resultLeftSquareBracketRightSquareBracket, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (open != null) r'open': encodeQueryParameter(_serializers, open, const FullType(bool)),
-      if (openLeftSquareBracketRightSquareBracket != null) r'open[]': encodeCollectionQueryParameter<bool>(_serializers, openLeftSquareBracketRightSquareBracket, const FullType(BuiltList, [FullType(bool)]), format: ListFormat.multi,),
-      if (code != null) r'code': encodeQueryParameter(_serializers, code, const FullType(String)),
-      if (codeLeftSquareBracketRightSquareBracket != null) r'code[]': encodeCollectionQueryParameter<String>(_serializers, codeLeftSquareBracketRightSquareBracket, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (orderLeftSquareBracketCreatedAtRightSquareBracket != null) r'order[createdAt]': encodeQueryParameter(_serializers, orderLeftSquareBracketCreatedAtRightSquareBracket, const FullType(String)),
-      if (orderLeftSquareBracketFinishedAtRightSquareBracket != null) r'order[finishedAt]': encodeQueryParameter(_serializers, orderLeftSquareBracketFinishedAtRightSquareBracket, const FullType(String)),
-      if (orderLeftSquareBracketResultRightSquareBracket != null) r'order[result]': encodeQueryParameter(_serializers, orderLeftSquareBracketResultRightSquareBracket, const FullType(String)),
+      if (page != null)
+        r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
+      if (player1 != null)
+        r'player1':
+            encodeQueryParameter(_serializers, player1, const FullType(String)),
+      if (player1LeftSquareBracketRightSquareBracket != null)
+        r'player1[]': encodeCollectionQueryParameter<String>(
+          _serializers,
+          player1LeftSquareBracketRightSquareBracket,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (player2 != null)
+        r'player2':
+            encodeQueryParameter(_serializers, player2, const FullType(String)),
+      if (player2LeftSquareBracketRightSquareBracket != null)
+        r'player2[]': encodeCollectionQueryParameter<String>(
+          _serializers,
+          player2LeftSquareBracketRightSquareBracket,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (result != null)
+        r'result':
+            encodeQueryParameter(_serializers, result, const FullType(String)),
+      if (resultLeftSquareBracketRightSquareBracket != null)
+        r'result[]': encodeCollectionQueryParameter<String>(
+          _serializers,
+          resultLeftSquareBracketRightSquareBracket,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (open != null)
+        r'open': encodeQueryParameter(_serializers, open, const FullType(bool)),
+      if (openLeftSquareBracketRightSquareBracket != null)
+        r'open[]': encodeCollectionQueryParameter<bool>(
+          _serializers,
+          openLeftSquareBracketRightSquareBracket,
+          const FullType(BuiltList, [FullType(bool)]),
+          format: ListFormat.multi,
+        ),
+      if (code != null)
+        r'code':
+            encodeQueryParameter(_serializers, code, const FullType(String)),
+      if (codeLeftSquareBracketRightSquareBracket != null)
+        r'code[]': encodeCollectionQueryParameter<String>(
+          _serializers,
+          codeLeftSquareBracketRightSquareBracket,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (orderLeftSquareBracketCreatedAtRightSquareBracket != null)
+        r'order[createdAt]': encodeQueryParameter(
+            _serializers,
+            orderLeftSquareBracketCreatedAtRightSquareBracket,
+            const FullType(String)),
+      if (orderLeftSquareBracketFinishedAtRightSquareBracket != null)
+        r'order[finishedAt]': encodeQueryParameter(
+            _serializers,
+            orderLeftSquareBracketFinishedAtRightSquareBracket,
+            const FullType(String)),
+      if (orderLeftSquareBracketResultRightSquareBracket != null)
+        r'order[result]': encodeQueryParameter(
+            _serializers,
+            orderLeftSquareBracketResultRightSquareBracket,
+            const FullType(String)),
     };
 
     final _response = await _dio.request<Object>(
@@ -123,7 +174,6 @@ class GameApi {
         _response.data!,
         specifiedType: _responseType,
       ) as ApiGamesGetCollection200Response;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -159,7 +209,7 @@ class GameApi {
   ///
   /// Returns a [Future] containing a [Response] with a [GameJsonldGameRead] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<GameJsonldGameRead>> apiGamesIdGet({ 
+  Future<Response<GameJsonldGameRead>> apiGamesIdGet({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -203,7 +253,6 @@ class GameApi {
         _response.data!,
         specifiedType: _responseType,
       ) as GameJsonldGameRead;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -239,7 +288,7 @@ class GameApi {
   ///
   /// Returns a [Future] containing a [Response] with a [GameJsonldGameRead] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<GameJsonldGameRead>> apiGamesPost({ 
+  Future<Response<GameJsonldGameRead>> apiGamesPost({
     required GameJsonldGameCreate gameJsonldGameCreate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -272,11 +321,11 @@ class GameApi {
 
     try {
       const _type = FullType(GameJsonldGameCreate);
-      _bodyData = _serializers.serialize(gameJsonldGameCreate, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData =
+          _serializers.serialize(gameJsonldGameCreate, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -302,7 +351,6 @@ class GameApi {
         _response.data!,
         specifiedType: _responseType,
       ) as GameJsonldGameRead;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -323,5 +371,4 @@ class GameApi {
       extra: _response.extra,
     );
   }
-
 }

@@ -34,7 +34,8 @@ class AuthToken {
 
   String toJson() => json.encode(toMap());
 
-  factory AuthToken.fromJson(String source) => AuthToken.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory AuthToken.fromJson(String source) =>
+      AuthToken.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'AuthToken(token: $token, refreshToken: $refreshToken)';
@@ -42,10 +43,8 @@ class AuthToken {
   @override
   bool operator ==(covariant AuthToken other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.token == token &&
-      other.refreshToken == refreshToken;
+
+    return other.token == token && other.refreshToken == refreshToken;
   }
 
   @override

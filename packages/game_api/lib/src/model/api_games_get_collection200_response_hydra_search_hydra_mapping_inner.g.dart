@@ -21,7 +21,7 @@ class _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner
           [void Function(
                   ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder)?
               updates]) =>
-      (new ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder()
+      (ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder()
             ..update(updates))
           ._build();
 
@@ -39,7 +39,7 @@ class _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner
   @override
   ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder
       toBuilder() =>
-          new ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder()
+          ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder()
             ..replace(this);
 
   @override
@@ -138,7 +138,7 @@ class ApiGamesGetCollection200ResponseHydraSearchHydraMappingInnerBuilder
 
   _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner _build() {
     final _$result = _$v ??
-        new _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner._(
+        _$ApiGamesGetCollection200ResponseHydraSearchHydraMappingInner._(
             atType: atType,
             variable: variable,
             property: property,

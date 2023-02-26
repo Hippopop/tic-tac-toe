@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -121,12 +120,12 @@ class _GameScreenState extends State<GameScreen> {
                     log("isPlayer ${value.isPlayer}");
                     log("isTurn ${value.isTurn}");
                     return AbsorbPointer(
-                    absorbing: !value.isPlayer,
-                    child: GameBox(
-                      turns: value.currentGame?.turns ?? [],
-                      refresh: (value.isPlayer && !value.isTurn),
-                    ),
-                  );
+                      absorbing: !value.isPlayer,
+                      child: GameBox(
+                        turns: value.currentGame?.turns ?? [],
+                        refresh: (value.isPlayer && !value.isTurn),
+                      ),
+                    );
                   },
                   // child: ,
                 ),

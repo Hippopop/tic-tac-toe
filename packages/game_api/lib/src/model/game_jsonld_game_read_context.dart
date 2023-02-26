@@ -15,27 +15,36 @@ part 'game_jsonld_game_read_context.g.dart';
 /// GameJsonldGameReadContext
 ///
 /// Properties:
-/// * [atVocab] 
-/// * [hydra] 
+/// * [atVocab]
+/// * [hydra]
 @BuiltValue()
-abstract class GameJsonldGameReadContext implements Built<GameJsonldGameReadContext, GameJsonldGameReadContextBuilder> {
+abstract class GameJsonldGameReadContext
+    implements
+        Built<GameJsonldGameReadContext, GameJsonldGameReadContextBuilder> {
   /// One Of [GameJsonldGameReadContextOneOf], [String]
   OneOf get oneOf;
 
   GameJsonldGameReadContext._();
 
-  factory GameJsonldGameReadContext([void updates(GameJsonldGameReadContextBuilder b)]) = _$GameJsonldGameReadContext;
+  factory GameJsonldGameReadContext(
+          [void updates(GameJsonldGameReadContextBuilder b)]) =
+      _$GameJsonldGameReadContext;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GameJsonldGameReadContextBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GameJsonldGameReadContext> get serializer => _$GameJsonldGameReadContextSerializer();
+  static Serializer<GameJsonldGameReadContext> get serializer =>
+      _$GameJsonldGameReadContextSerializer();
 }
 
-class _$GameJsonldGameReadContextSerializer implements PrimitiveSerializer<GameJsonldGameReadContext> {
+class _$GameJsonldGameReadContextSerializer
+    implements PrimitiveSerializer<GameJsonldGameReadContext> {
   @override
-  final Iterable<Type> types = const [GameJsonldGameReadContext, _$GameJsonldGameReadContext];
+  final Iterable<Type> types = const [
+    GameJsonldGameReadContext,
+    _$GameJsonldGameReadContext
+  ];
 
   @override
   final String wireName = r'GameJsonldGameReadContext';
@@ -44,8 +53,7 @@ class _$GameJsonldGameReadContextSerializer implements PrimitiveSerializer<GameJ
     Serializers serializers,
     GameJsonldGameReadContext object, {
     FullType specifiedType = FullType.unspecified,
-  }) sync* {
-  }
+  }) sync* {}
 
   @override
   Object serialize(
@@ -54,7 +62,8 @@ class _$GameJsonldGameReadContextSerializer implements PrimitiveSerializer<GameJ
     FullType specifiedType = FullType.unspecified,
   }) {
     final oneOf = object.oneOf;
-    return serializers.serialize(oneOf.value, specifiedType: FullType(oneOf.valueType))!;
+    return serializers.serialize(oneOf.value,
+        specifiedType: FullType(oneOf.valueType))!;
   }
 
   @override
@@ -65,23 +74,30 @@ class _$GameJsonldGameReadContextSerializer implements PrimitiveSerializer<GameJ
   }) {
     final result = GameJsonldGameReadContextBuilder();
     Object? oneOfDataSrc;
-    final targetType = const FullType(OneOf, [FullType(String), FullType(GameJsonldGameReadContextOneOf), ]);
+    final targetType = const FullType(OneOf, [
+      FullType(String),
+      FullType(GameJsonldGameReadContextOneOf),
+    ]);
     oneOfDataSrc = serialized;
-    result.oneOf = serializers.deserialize(oneOfDataSrc, specifiedType: targetType) as OneOf;
+    result.oneOf = serializers.deserialize(oneOfDataSrc,
+        specifiedType: targetType) as OneOf;
     return result.build();
   }
 }
 
 class GameJsonldGameReadContextHydraEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'http://www.w3.org/ns/hydra/core#')
-  static const GameJsonldGameReadContextHydraEnum httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash = _$gameJsonldGameReadContextHydraEnum_httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash;
+  static const GameJsonldGameReadContextHydraEnum
+      httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash =
+      _$gameJsonldGameReadContextHydraEnum_httpColonSlashSlashWwwPeriodW3PeriodOrgSlashNsSlashHydraSlashCoreHash;
 
-  static Serializer<GameJsonldGameReadContextHydraEnum> get serializer => _$gameJsonldGameReadContextHydraEnumSerializer;
+  static Serializer<GameJsonldGameReadContextHydraEnum> get serializer =>
+      _$gameJsonldGameReadContextHydraEnumSerializer;
 
-  const GameJsonldGameReadContextHydraEnum._(String name): super(name);
+  const GameJsonldGameReadContextHydraEnum._(String name) : super(name);
 
-  static BuiltSet<GameJsonldGameReadContextHydraEnum> get values => _$gameJsonldGameReadContextHydraEnumValues;
-  static GameJsonldGameReadContextHydraEnum valueOf(String name) => _$gameJsonldGameReadContextHydraEnumValueOf(name);
+  static BuiltSet<GameJsonldGameReadContextHydraEnum> get values =>
+      _$gameJsonldGameReadContextHydraEnumValues;
+  static GameJsonldGameReadContextHydraEnum valueOf(String name) =>
+      _$gameJsonldGameReadContextHydraEnumValueOf(name);
 }
-

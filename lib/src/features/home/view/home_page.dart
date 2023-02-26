@@ -17,7 +17,7 @@ class HomepageScreen extends StatefulWidget {
 }
 
 class _HomepageScreenState extends State<HomepageScreen> {
-@override
+  @override
   void initState() {
     super.initState();
     context.read<AuthController>().fetchCurrentUser();
@@ -46,7 +46,9 @@ class _HomepageScreenState extends State<HomepageScreen> {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                         child: RefreshIndicator(
-                          onRefresh: () async => await context.read<HomeController>().fetchGameList(),
+                          onRefresh: () async => await context
+                              .read<HomeController>()
+                              .fetchGameList(),
                           child: GridView(
                             padding: EdgeInsets.zero,
                             gridDelegate:
@@ -81,4 +83,3 @@ class _HomepageScreenState extends State<HomepageScreen> {
     );
   }
 }
-

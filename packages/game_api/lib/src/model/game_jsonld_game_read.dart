@@ -11,24 +11,25 @@ import 'package:built_value/serializer.dart';
 
 part 'game_jsonld_game_read.g.dart';
 
-/// 
+///
 ///
 /// Properties:
-/// * [atContext] 
-/// * [atId] 
-/// * [atType] 
-/// * [id] 
-/// * [player1] 
-/// * [player2] 
-/// * [result] 
-/// * [open] 
-/// * [code] 
-/// * [createdAt] 
-/// * [finishedAt] 
-/// * [turns] 
-/// * [currentTurnPlayer] 
+/// * [atContext]
+/// * [atId]
+/// * [atType]
+/// * [id]
+/// * [player1]
+/// * [player2]
+/// * [result]
+/// * [open]
+/// * [code]
+/// * [createdAt]
+/// * [finishedAt]
+/// * [turns]
+/// * [currentTurnPlayer]
 @BuiltValue()
-abstract class GameJsonldGameRead implements Built<GameJsonldGameRead, GameJsonldGameReadBuilder> {
+abstract class GameJsonldGameRead
+    implements Built<GameJsonldGameRead, GameJsonldGameReadBuilder> {
   @BuiltValueField(wireName: r'@context')
   GameJsonldGameReadContext? get atContext;
 
@@ -71,18 +72,21 @@ abstract class GameJsonldGameRead implements Built<GameJsonldGameRead, GameJsonl
 
   GameJsonldGameRead._();
 
-  factory GameJsonldGameRead([void updates(GameJsonldGameReadBuilder b)]) = _$GameJsonldGameRead;
+  factory GameJsonldGameRead([void updates(GameJsonldGameReadBuilder b)]) =
+      _$GameJsonldGameRead;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GameJsonldGameReadBuilder b) => b
-      ..result = const GameJsonldGameReadResultEnum._('Unfinished')
-      ..open = true;
+    ..result = const GameJsonldGameReadResultEnum._('Unfinished')
+    ..open = true;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GameJsonldGameRead> get serializer => _$GameJsonldGameReadSerializer();
+  static Serializer<GameJsonldGameRead> get serializer =>
+      _$GameJsonldGameReadSerializer();
 }
 
-class _$GameJsonldGameReadSerializer implements PrimitiveSerializer<GameJsonldGameRead> {
+class _$GameJsonldGameReadSerializer
+    implements PrimitiveSerializer<GameJsonldGameRead> {
   @override
   final Iterable<Type> types = const [GameJsonldGameRead, _$GameJsonldGameRead];
 
@@ -130,10 +134,12 @@ class _$GameJsonldGameReadSerializer implements PrimitiveSerializer<GameJsonldGa
       );
     }
     yield r'player2';
-    yield object.player2 == null ? null : serializers.serialize(
-      object.player2,
-      specifiedType: const FullType.nullable(String),
-    );
+    yield object.player2 == null
+        ? null
+        : serializers.serialize(
+            object.player2,
+            specifiedType: const FullType.nullable(String),
+          );
     if (object.result != null) {
       yield r'result';
       yield serializers.serialize(
@@ -173,7 +179,8 @@ class _$GameJsonldGameReadSerializer implements PrimitiveSerializer<GameJsonldGa
       yield r'turns';
       yield serializers.serialize(
         object.turns,
-        specifiedType: const FullType(BuiltList, [FullType(TurnJsonldGameRead)]),
+        specifiedType:
+            const FullType(BuiltList, [FullType(TurnJsonldGameRead)]),
       );
     }
     if (object.currentTurnPlayer != null) {
@@ -191,7 +198,9 @@ class _$GameJsonldGameReadSerializer implements PrimitiveSerializer<GameJsonldGa
     GameJsonldGameRead object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -292,7 +301,8 @@ class _$GameJsonldGameReadSerializer implements PrimitiveSerializer<GameJsonldGa
         case r'turns':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(BuiltList, [FullType(TurnJsonldGameRead)]),
+            specifiedType:
+                const FullType(BuiltList, [FullType(TurnJsonldGameRead)]),
           ) as BuiltList<TurnJsonldGameRead>;
           result.turns.replace(valueDes);
           break;
@@ -333,21 +343,26 @@ class _$GameJsonldGameReadSerializer implements PrimitiveSerializer<GameJsonldGa
 }
 
 class GameJsonldGameReadResultEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'Unfinished')
-  static const GameJsonldGameReadResultEnum unfinished = _$gameJsonldGameReadResultEnum_unfinished;
+  static const GameJsonldGameReadResultEnum unfinished =
+      _$gameJsonldGameReadResultEnum_unfinished;
   @BuiltValueEnumConst(wireName: r'Player 1')
-  static const GameJsonldGameReadResultEnum player1 = _$gameJsonldGameReadResultEnum_player1;
+  static const GameJsonldGameReadResultEnum player1 =
+      _$gameJsonldGameReadResultEnum_player1;
   @BuiltValueEnumConst(wireName: r'Player 2')
-  static const GameJsonldGameReadResultEnum player2 = _$gameJsonldGameReadResultEnum_player2;
+  static const GameJsonldGameReadResultEnum player2 =
+      _$gameJsonldGameReadResultEnum_player2;
   @BuiltValueEnumConst(wireName: r'Draw')
-  static const GameJsonldGameReadResultEnum draw = _$gameJsonldGameReadResultEnum_draw;
+  static const GameJsonldGameReadResultEnum draw =
+      _$gameJsonldGameReadResultEnum_draw;
 
-  static Serializer<GameJsonldGameReadResultEnum> get serializer => _$gameJsonldGameReadResultEnumSerializer;
+  static Serializer<GameJsonldGameReadResultEnum> get serializer =>
+      _$gameJsonldGameReadResultEnumSerializer;
 
-  const GameJsonldGameReadResultEnum._(String name): super(name);
+  const GameJsonldGameReadResultEnum._(String name) : super(name);
 
-  static BuiltSet<GameJsonldGameReadResultEnum> get values => _$gameJsonldGameReadResultEnumValues;
-  static GameJsonldGameReadResultEnum valueOf(String name) => _$gameJsonldGameReadResultEnumValueOf(name);
+  static BuiltSet<GameJsonldGameReadResultEnum> get values =>
+      _$gameJsonldGameReadResultEnumValues;
+  static GameJsonldGameReadResultEnum valueOf(String name) =>
+      _$gameJsonldGameReadResultEnumValueOf(name);
 }
-

@@ -12,7 +12,6 @@ import 'package:openapi/src/model/refresh_token.dart';
 import 'package:openapi/src/model/token.dart';
 
 class TokenApi {
-
   final Dio _dio;
 
   final Serializers _serializers;
@@ -20,7 +19,7 @@ class TokenApi {
   const TokenApi(this._dio, this._serializers);
 
   /// Get JWT token to login, refresh_token to refresh expired token.
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [credentials] - Generate new JWT Token
@@ -33,7 +32,7 @@ class TokenApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Token] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Token>> postCredentialsItem({ 
+  Future<Response<Token>> postCredentialsItem({
     Credentials? credentials,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -60,11 +59,12 @@ class TokenApi {
 
     try {
       const _type = FullType(Credentials);
-      _bodyData = credentials == null ? null : _serializers.serialize(credentials, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = credentials == null
+          ? null
+          : _serializers.serialize(credentials, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -90,7 +90,6 @@ class TokenApi {
         _response.data!,
         specifiedType: _responseType,
       ) as Token;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -113,7 +112,7 @@ class TokenApi {
   }
 
   /// Get new refreshed JWT token from refresh_token.
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [refreshToken] - Generate refreshed JWT Token
@@ -126,7 +125,7 @@ class TokenApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Token] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Token>> postRefreshTokenItem({ 
+  Future<Response<Token>> postRefreshTokenItem({
     RefreshToken? refreshToken,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -153,11 +152,12 @@ class TokenApi {
 
     try {
       const _type = FullType(RefreshToken);
-      _bodyData = refreshToken == null ? null : _serializers.serialize(refreshToken, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = refreshToken == null
+          ? null
+          : _serializers.serialize(refreshToken, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -183,7 +183,6 @@ class TokenApi {
         _response.data!,
         specifiedType: _responseType,
       ) as Token;
-
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -204,5 +203,4 @@ class TokenApi {
       extra: _response.extra,
     );
   }
-
 }

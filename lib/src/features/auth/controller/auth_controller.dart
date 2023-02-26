@@ -94,7 +94,7 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
   }
 
-  ///`NOTE`: This api, responds with 
+  ///`NOTE`: This api, responds with
   ///```json
   ///{
   /// "code": 401,

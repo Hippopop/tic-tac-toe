@@ -1,7 +1,6 @@
 import 'package:test/test.dart';
 import 'package:openapi/openapi.dart';
 
-
 /// tests for TokenApi
 void main() {
   final instance = Openapi().getTokenApi();
@@ -20,6 +19,5 @@ void main() {
     test('test postRefreshTokenItem', () async {
       // TODO
     });
-
   });
 }

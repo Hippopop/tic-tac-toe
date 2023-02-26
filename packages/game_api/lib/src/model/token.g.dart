@@ -13,7 +13,7 @@ class _$Token extends Token {
   final String? refreshToken;
 
   factory _$Token([void Function(TokenBuilder)? updates]) =>
-      (new TokenBuilder()..update(updates))._build();
+      (TokenBuilder()..update(updates))._build();
 
   _$Token._({this.token, this.refreshToken}) : super._();
 
@@ -22,7 +22,7 @@ class _$Token extends Token {
       (toBuilder()..update(updates)).build();
 
   @override
-  TokenBuilder toBuilder() => new TokenBuilder()..replace(this);
+  TokenBuilder toBuilder() => TokenBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -90,8 +90,7 @@ class TokenBuilder implements Builder<Token, TokenBuilder> {
   Token build() => _build();
 
   _$Token _build() {
-    final _$result =
-        _$v ?? new _$Token._(token: token, refreshToken: refreshToken);
+    final _$result = _$v ?? _$Token._(token: token, refreshToken: refreshToken);
     replace(_$result);
     return _$result;
   }

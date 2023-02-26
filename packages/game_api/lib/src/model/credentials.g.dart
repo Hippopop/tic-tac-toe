@@ -13,7 +13,7 @@ class _$Credentials extends Credentials {
   final String? password;
 
   factory _$Credentials([void Function(CredentialsBuilder)? updates]) =>
-      (new CredentialsBuilder()..update(updates))._build();
+      (CredentialsBuilder()..update(updates))._build();
 
   _$Credentials._({this.email, this.password}) : super._();
 
@@ -22,7 +22,7 @@ class _$Credentials extends Credentials {
       (toBuilder()..update(updates)).build();
 
   @override
-  CredentialsBuilder toBuilder() => new CredentialsBuilder()..replace(this);
+  CredentialsBuilder toBuilder() => CredentialsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -90,8 +90,7 @@ class CredentialsBuilder implements Builder<Credentials, CredentialsBuilder> {
   Credentials build() => _build();
 
   _$Credentials _build() {
-    final _$result =
-        _$v ?? new _$Credentials._(email: email, password: password);
+    final _$result = _$v ?? _$Credentials._(email: email, password: password);
     replace(_$result);
     return _$result;
   }

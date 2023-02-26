@@ -12,7 +12,7 @@ class _$GameJsonldGameCreate extends GameJsonldGameCreate {
 
   factory _$GameJsonldGameCreate(
           [void Function(GameJsonldGameCreateBuilder)? updates]) =>
-      (new GameJsonldGameCreateBuilder()..update(updates))._build();
+      (GameJsonldGameCreateBuilder()..update(updates))._build();
 
   _$GameJsonldGameCreate._({this.player2}) : super._();
 
@@ -23,7 +23,7 @@ class _$GameJsonldGameCreate extends GameJsonldGameCreate {
 
   @override
   GameJsonldGameCreateBuilder toBuilder() =>
-      new GameJsonldGameCreateBuilder()..replace(this);
+      GameJsonldGameCreateBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -83,7 +83,7 @@ class GameJsonldGameCreateBuilder
   GameJsonldGameCreate build() => _build();
 
   _$GameJsonldGameCreate _build() {
-    final _$result = _$v ?? new _$GameJsonldGameCreate._(player2: player2);
+    final _$result = _$v ?? _$GameJsonldGameCreate._(player2: player2);
     replace(_$result);
     return _$result;
   }

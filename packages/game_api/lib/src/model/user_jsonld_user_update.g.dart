@@ -14,7 +14,7 @@ class _$UserJsonldUserUpdate extends UserJsonldUserUpdate {
 
   factory _$UserJsonldUserUpdate(
           [void Function(UserJsonldUserUpdateBuilder)? updates]) =>
-      (new UserJsonldUserUpdateBuilder()..update(updates))._build();
+      (UserJsonldUserUpdateBuilder()..update(updates))._build();
 
   _$UserJsonldUserUpdate._({this.plainPassword, this.name}) : super._();
 
@@ -25,7 +25,7 @@ class _$UserJsonldUserUpdate extends UserJsonldUserUpdate {
 
   @override
   UserJsonldUserUpdateBuilder toBuilder() =>
-      new UserJsonldUserUpdateBuilder()..replace(this);
+      UserJsonldUserUpdateBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -96,7 +96,7 @@ class UserJsonldUserUpdateBuilder
 
   _$UserJsonldUserUpdate _build() {
     final _$result = _$v ??
-        new _$UserJsonldUserUpdate._(plainPassword: plainPassword, name: name);
+        _$UserJsonldUserUpdate._(plainPassword: plainPassword, name: name);
     replace(_$result);
     return _$result;
   }

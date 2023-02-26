@@ -8,14 +8,15 @@ import 'package:built_value/serializer.dart';
 
 part 'user_jsonld_user_create.g.dart';
 
-/// 
+///
 ///
 /// Properties:
-/// * [email] 
-/// * [plainPassword] 
-/// * [name] 
+/// * [email]
+/// * [plainPassword]
+/// * [name]
 @BuiltValue()
-abstract class UserJsonldUserCreate implements Built<UserJsonldUserCreate, UserJsonldUserCreateBuilder> {
+abstract class UserJsonldUserCreate
+    implements Built<UserJsonldUserCreate, UserJsonldUserCreateBuilder> {
   @BuiltValueField(wireName: r'email')
   String? get email;
 
@@ -27,18 +28,24 @@ abstract class UserJsonldUserCreate implements Built<UserJsonldUserCreate, UserJ
 
   UserJsonldUserCreate._();
 
-  factory UserJsonldUserCreate([void updates(UserJsonldUserCreateBuilder b)]) = _$UserJsonldUserCreate;
+  factory UserJsonldUserCreate([void updates(UserJsonldUserCreateBuilder b)]) =
+      _$UserJsonldUserCreate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserJsonldUserCreateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserJsonldUserCreate> get serializer => _$UserJsonldUserCreateSerializer();
+  static Serializer<UserJsonldUserCreate> get serializer =>
+      _$UserJsonldUserCreateSerializer();
 }
 
-class _$UserJsonldUserCreateSerializer implements PrimitiveSerializer<UserJsonldUserCreate> {
+class _$UserJsonldUserCreateSerializer
+    implements PrimitiveSerializer<UserJsonldUserCreate> {
   @override
-  final Iterable<Type> types = const [UserJsonldUserCreate, _$UserJsonldUserCreate];
+  final Iterable<Type> types = const [
+    UserJsonldUserCreate,
+    _$UserJsonldUserCreate
+  ];
 
   @override
   final String wireName = r'UserJsonldUserCreate';
@@ -77,7 +84,9 @@ class _$UserJsonldUserCreateSerializer implements PrimitiveSerializer<UserJsonld
     UserJsonldUserCreate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -141,4 +150,3 @@ class _$UserJsonldUserCreateSerializer implements PrimitiveSerializer<UserJsonld
     return result.build();
   }
 }
-
