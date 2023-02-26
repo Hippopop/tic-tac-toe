@@ -1,52 +1,42 @@
-import 'package:go_router/go_router.dart';
+import 'package:collection/collection.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
-import 'package:tic_tac_toe/src/features/auth/domain/models/login_request_model.dart';
+import 'package:tic_tac_toe/src/features/auth/domain/models/user_model.dart';
 import 'package:tic_tac_toe/src/features/auth/view/widgets/button_widget.dart';
 import 'package:tic_tac_toe/src/services/theme/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 
-class SigninScreen extends StatefulWidget {
-  const SigninScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SigninScreen> createState() => _SigninScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SigninScreenState extends State<SigninScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   late final TextEditingController _emailController;
+  late final TextEditingController _nameController;
   late final TextEditingController _passController;
+  User? currentUser;
   bool obsecure = true;
 
   @override
   void initState() {
     super.initState();
     _emailController = TextEditingController();
+    _nameController = TextEditingController();
     _passController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passController.dispose();
-    super.dispose();
+    currentUser = context.read<AuthController>().currentUser;
+    _nameController.text = currentUser?.name ?? "";
   }
 
   @override
   Widget build(BuildContext context) {
-    return Selector<AuthController, bool>(
-      selector: (context, data) {
-        return data.isLoading;
-      },
-      builder: (context, value, child) => value
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : child!,
-      child: Scaffold(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          child: Column(
+    return Scaffold(
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      body: SafeArea(
+        child: Consumer<AuthController>(builder: (context, value, child) {
+          return Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,13 +48,13 @@ class _SigninScreenState extends State<SigninScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Welcome!',
+                      'Create Account',
                       style: FlutterFlowTheme.of(context).title1,
                     ),
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                       child: Text(
-                        'Use the form below to access your account.',
+                        'Use the form below to create a new user profile.',
                         style: FlutterFlowTheme.of(context).bodyText2,
                       ),
                     ),
@@ -88,7 +78,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               controller: _emailController,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Email Address',
+                                labelText: 'Email',
                                 labelStyle:
                                     FlutterFlowTheme.of(context).bodyText2,
                                 hintText: 'Enter your email here...',
@@ -124,6 +114,11 @@ class _SigninScreenState extends State<SigninScreen> {
                                   borderRadius: BorderRadius.circular(40),
                                 ),
                                 filled: true,
+                                errorText: value.currentViolations
+                                    .where((element) =>
+                                        element.propertyPath == "email")
+                                    .firstOrNull
+                                    ?.message,
                                 fillColor: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                                 contentPadding:
@@ -132,8 +127,72 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1,
                               maxLines: null,
-                              // validator: _model.emailAddressControllerValidator
-                              //     .asValidator(context),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: _nameController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Name',
+                                labelStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                hintText: 'Enter your name here...',
+                                hintStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                filled: true,
+                                errorText: value.currentViolations
+                                    .where((element) =>
+                                        element.propertyPath == "name")
+                                    .firstOrNull
+                                    ?.message,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                contentPadding:
+                                    const EdgeInsetsDirectional.fromSTEB(
+                                        16, 24, 0, 24),
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                              maxLines: null,
                             ),
                           ),
                         ],
@@ -187,6 +246,13 @@ class _SigninScreenState extends State<SigninScreen> {
                                   borderRadius: BorderRadius.circular(40),
                                 ),
                                 filled: true,
+                                errorText: context
+                                    .watch<AuthController>()
+                                    .currentViolations
+                                    .where((element) =>
+                                        element.propertyPath == "plainPassword")
+                                    .firstOrNull
+                                    ?.message,
                                 fillColor: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                                 contentPadding:
@@ -208,8 +274,6 @@ class _SigninScreenState extends State<SigninScreen> {
                                 ),
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1,
-                              // validator: _model.passwordControllerValidator
-                              //     .asValidator(context),
                             ),
                           ),
                         ],
@@ -225,17 +289,19 @@ class _SigninScreenState extends State<SigninScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FFButtonWidget(
-                      onPressed: () {
-                        Provider.of<AuthController>(context, listen: false)
-                            .userLogin(
-                          request: LoginRequest(
-                            email: _emailController.text,
-                            password: _passController.text,
+                      onPressed: () async {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text(
+                                "This feature is implemented, But the API isn't functioning."),
                           ),
-                          onSuccess: () {
-                            context.pushReplacement("/home");
-                          },
-                          onError: (msg) {
+                        );
+                        /* await value.createNewUser(
+                          email: _emailController.text,
+                          name: _nameController.text,
+                          pass: _passController.text,
+                          onCreate: (msg) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 backgroundColor: Colors.red,
@@ -243,9 +309,9 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                             );
                           },
-                        );
+                        ); */
                       },
-                      text: "Login",
+                      text: 'Register',
                       options: FFButtonOptions(
                         width: 130,
                         height: 50,
@@ -265,45 +331,9 @@ class _SigninScreenState extends State<SigninScreen> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 24, 0, 24),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don\'t have an account?',
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
-                    FFButtonWidget(
-                      onPressed: () {
-                        context.push('/reg');
-                      },
-                      text: 'Create Account',
-                      options: FFButtonOptions(
-                        width: 150,
-                        height: 30,
-                        color: const Color(0x00FFFFFF),
-                        textStyle: FlutterFlowTheme.of(context)
-                            .subtitle2
-                            .override(
-                              fontFamily: 'Poppins',
-                              color:
-                                  FlutterFlowTheme.of(context).secondaryColor,
-                            ),
-                        elevation: 0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ],
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

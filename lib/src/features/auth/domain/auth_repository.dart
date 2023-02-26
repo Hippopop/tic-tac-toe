@@ -11,6 +11,7 @@ class AuthRepository {
   AuthRepository({required this.requestHandler});
   static const authenticateTokenPath = "/api/authentication_token";
   static const currentUserPath = "/api/users/me";
+  static const userPath = "/api/users";
 
   Future<Either<RequestException?, AuthToken>> requestLogin(
       {required LoginRequest requestData}) async {
@@ -30,15 +31,23 @@ class AuthRepository {
     }).run();
   }
 
-/*   Future<Either<RequestException?, AuthToken>> requestLogin(
-      {required LoginRequest requestData}) async {
+  Future<Either<RequestException?, User>> registerUser({
+    required String email,
+    required String name,
+    required String password,
+  }) async {
     return TaskEither.tryCatch(() async {
       final res = await requestHandler.post(
-        authenticateTokenPath,
-        requestData.toMap(),
+        userPath,
+        {
+          "email": email,
+          "name": name,
+          "plainPassword": password,
+        },
         requireToken: false,
       );
-      return AuthToken.fromMap(res);
+      log(res.toString());
+      return User.fromMap(res);
     }, (error, stackTrace) {
       if (error is RequestException) {
         return error;
@@ -46,7 +55,28 @@ class AuthRepository {
         log("#Unhandled Error", error: error, stackTrace: stackTrace);
       }
     }).run();
-  } */
+  }
+
+  Future<Either<RequestException?, User>> updateUser({
+    required String name,
+    required String password,
+    required int id,
+  }) async {
+    return TaskEither.tryCatch(() async {
+      final res = await requestHandler.put(
+        "$userPath/$id",
+        {"name": name, "plainPassword": password},
+      );
+      log(res.toString());
+      return User.fromMap(res);
+    }, (error, stackTrace) {
+      if (error is RequestException) {
+        return error;
+      } else {
+        log("#Unhandled Error", error: error, stackTrace: stackTrace);
+      }
+    }).run();
+  }
 
   Future<Either<RequestException?, User>> getCurrentUser() async {
     return TaskEither.tryCatch(() async {

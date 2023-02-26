@@ -55,6 +55,7 @@ void main() async {
         ),
         ChangeNotifierProxyProvider<RequestHandler, UserController>(
           update: (context, value, previous) => UserController(requestHandler: value),
+          lazy: false,
           create: (context) => UserController(
             requestHandler: context.read(),
           ),

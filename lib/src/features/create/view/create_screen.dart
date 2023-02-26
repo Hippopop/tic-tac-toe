@@ -2,8 +2,9 @@ import 'dart:developer';
 
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:tic_tac_toe/src/features/auth/controller/auth_controller.dart';
 import 'package:tic_tac_toe/src/features/auth/domain/models/user_model.dart';
-import 'package:tic_tac_toe/src/features/auth/view/flutter_flow_widget.dart';
+import 'package:tic_tac_toe/src/features/auth/view/widgets/button_widget.dart';
 import 'package:tic_tac_toe/src/features/create/controller/create_controller.dart';
 import 'package:tic_tac_toe/src/features/home/view/widgets/bottom_bar.dart';
 import 'package:tic_tac_toe/src/features/home/view/widgets/top_bar.dart';
@@ -30,7 +31,7 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   callApiForData() {
-    if (_controller.text.length > 2) {
+    if (_controller.text.length > 3) {
       context.read<UserController>().fetchUserList(_controller.text);
     }
   }
@@ -132,8 +133,6 @@ class _CreateScreenState extends State<CreateScreen> {
                           ),
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1,
-                        // validator:
-                        // _model.textControllerValidator.asValidator(context),
                       ),
                       Expanded(
                         child: Consumer<UserController>(
@@ -143,6 +142,9 @@ class _CreateScreenState extends State<CreateScreen> {
                                     .toLowerCase()
                                     .contains(_controller.text.toLowerCase()))
                                 .toList();
+                            users.removeWhere((element) =>
+                                element.id ==
+                                context.read<AuthController>().currentUser?.id);
                             log("${users.map((e) => e.id).toList()}");
                             return Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
@@ -187,6 +189,13 @@ class _CreateScreenState extends State<CreateScreen> {
                               ? null
                               : () async {
                                   if (_selectedUser == null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content: Text(
+                                            "Select a user by clicking on name!"),
+                                      ),
+                                    );
                                   } else {
                                     final res = await context
                                         .read<CreateController>()

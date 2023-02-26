@@ -3,14 +3,14 @@ class ErrorWithViolationMode {
   String? type;
   String? hydraTitle;
   String? hydraDescription;
-  List<Violations>? violations;
+  List<Violations> violations = [];
 
   ErrorWithViolationMode(
       {this.context,
       this.type,
       this.hydraTitle,
       this.hydraDescription,
-      this.violations});
+      this.violations = const []});
 
   ErrorWithViolationMode.fromMap(Map<String, dynamic> json) {
     context = json['@context'];
@@ -20,7 +20,7 @@ class ErrorWithViolationMode {
     if (json['violations'] != null) {
       violations = <Violations>[];
       json['violations'].forEach((v) {
-        violations!.add(Violations.fromMap(v));
+        violations.add(Violations.fromMap(v));
       });
     }
   }
@@ -31,9 +31,7 @@ class ErrorWithViolationMode {
     mapData['@type'] = type;
     mapData['hydra:title'] = hydraTitle;
     mapData['hydra:description'] = hydraDescription;
-    if (violations != null) {
-      mapData['violations'] = violations!.map((v) => v.toMap()).toList();
-    }
+    mapData['violations'] = violations.map((v) => v.toMap()).toList();
     return mapData;
   }
 }
